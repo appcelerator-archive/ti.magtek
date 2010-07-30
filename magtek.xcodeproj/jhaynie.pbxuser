@@ -1,0 +1,105 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Debug;
+		activeTarget = D2AAC07D0554694100DB518D /* magtek */;
+		codeSenseManager = 24A833551200B2610026778E /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					911,
+					20,
+					48.16259765625,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 302035545;
+			PBXWorkspaceStateSaveDate = 302035545;
+		};
+		perUserProjectItems = {
+			24A833811200B35E0026778E /* PBXTextBookmark */ = 24A833811200B35E0026778E /* PBXTextBookmark */;
+			24A833821200B35E0026778E /* XCBuildMessageTextBookmark */ = 24A833821200B35E0026778E /* XCBuildMessageTextBookmark */;
+			24A833F21201048D0026778E /* PBXTextBookmark */ = 24A833F21201048D0026778E /* PBXTextBookmark */;
+		};
+		sourceControlManager = 24A833541200B2610026778E /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	24416B8111C4CA220047AFDD /* Build & Test */ = {
+		activeExec = 0;
+	};
+	24A833541200B2610026778E /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	24A833551200B2610026778E /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	24A833811200B35E0026778E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF71134B3F500162E58 /* TiMagtekModule.h */;
+		name = "TiMagtekModule.h: 11";
+		rLen = 0;
+		rLoc = 246;
+		rType = 0;
+		vrLen = 374;
+		vrLoc = 0;
+	};
+	24A833821200B35E0026778E /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'TiBlob' undeclared (first use in this function)";
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 171;
+		rType = 1;
+	};
+	24A833F21201048D0026778E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 9";
+		rLen = 1;
+		rLoc = 226;
+		rType = 0;
+		vrLen = 451;
+		vrLoc = 0;
+	};
+	24DD6CF71134B3F500162E58 /* TiMagtekModule.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1089, 414}}";
+			sepNavSelRange = "{246, 0}";
+			sepNavVisRange = "{0, 374}";
+		};
+	};
+	24DD6CF81134B3F500162E58 /* TiMagtekModule.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1089, 5712}}";
+			sepNavSelRange = "{226, 1}";
+			sepNavVisRange = "{0, 451}";
+		};
+	};
+	D2AAC07D0554694100DB518D /* magtek */ = {
+		activeExec = 0;
+	};
+}
