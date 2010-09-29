@@ -14,3 +14,12 @@ window.open();
 var magtek = require('ti.magtek');
 Ti.API.info("module is => "+magtek);
 
+magtek.addEventListener('connected', function(e) {
+	Ti.API.log('Device connected: ' + e.name);
+});
+magtek.addEventListener('disconnected', function(e) {
+	Ti.API.log('Device disconnected: ' + e.name);
+});
+magtek.addEventListener('swipe', function(e) {
+	Ti.API.log('Swiped card: '+e.cardnumber);
+});

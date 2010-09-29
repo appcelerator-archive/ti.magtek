@@ -2,7 +2,7 @@
 
 ## Description
 
-TODO: Enter your module description here
+The magtek module allows for 
 
 ## Accessing the magtek Module
 
@@ -14,25 +14,48 @@ The magtek variable is a reference to the Module object.
 
 ## Reference
 
-TODO: If your module has an API, you should document
-the reference here.
+## Events 
 
-### ___PROJECTNAMEASIDENTIFIER__.function
+### connected
 
-TODO: This is an example of a module function.
+Fired when a scanning device is connected.  Event dictionary is:
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+connectionId[int]: The connection identifier
+name[string]: The name of the accessory
+manufacturer[string]: The manufacturer of the accessory
+modelNumber[string]: The model number for the accessory
+serialNumber[string]: The serial number for the accessory
+hardwareRevision[string]: The hardware revision of the accessory
+firmwareRevision[string]: The firmware revision of the accessory
 
-TODO: This is an example of a module property.
+### disconnected
+
+Fired when a scanning device is disconnected.  Event dictionary is:
+
+connectionId[int]: The connection identifier
+name[string]: The name of the accessory
+manufacturer[string]: The manufacturer of the accessory
+modelNumber[string]: The model number for the accessory
+serialNumber[string]: The serial number for the accessory
+hardwareRevision[string]: The hardware revision of the accessory
+firmwareRevision[string]: The firmware revision of the accessory
+
+### swipe
+
+Fired when a card is swiped through the scanning device.  Event dictionary is:
+
+name[string]: The name of the card owner
+cardnumber[string]: The (masked) card number
+expiration[string]: The expiration date, in xx/xx format.
+data[object]: A blob representing the data on the magstripe of the card.
 
 ## Usage
 
-TODO: Enter your usage example here
+See example.
 
 ## Author
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
+Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
 
 ## License
 
