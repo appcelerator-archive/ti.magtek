@@ -14,4 +14,4 @@ name: magtek
 moduleid: ti.magtek
 guid: 57754725-fe67-4e3f-90c7-1137ad0a5b13
 platform: iphone
-minsdk: 1.4.0
+minsdk: 1.4.1
