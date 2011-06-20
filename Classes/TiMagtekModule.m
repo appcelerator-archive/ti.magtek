@@ -12,6 +12,7 @@
 
 @implementation TiMagtekModule
 
+@synthesize fullbuffer;
 #pragma mark Internal
 
 // this is generated for your module, please do not change it
@@ -35,7 +36,7 @@
 	// this method is called when the module is first loaded
 	// you *must* call the superclass
 	[super startup];
-	
+	fullbuffer = @"";
 	NSLog(@"[INFO] Magtek iDynamo Reader Module loaded",self);
 }
 
@@ -116,10 +117,10 @@
             [[session inputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
 											 forMode:NSDefaultRunLoopMode];
             [[session inputStream] open];
-            [[session outputStream] setDelegate:self];
-            [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
-											  forMode:NSDefaultRunLoopMode];
-            [[session outputStream] open];
+            //[[session outputStream] setDelegate:self];
+           // [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
+			//								  forMode:NSDefaultRunLoopMode];
+            //[[session outputStream] open];
         }
     }
 	
@@ -128,27 +129,54 @@
 
 - (void)stream:(NSStream*)theStream handleEvent:(NSStreamEvent)streamEvent
 {
+	
     switch (streamEvent)
     {
         case NSStreamEventHasBytesAvailable:
 		{
-			uint8_t buf[512];
-            unsigned int len = [(NSInputStream *)theStream read:buf maxLength:512];
-            if(len) 
+			NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
+			
+			
+			//create and init input buffer
+			//NSString *tempString;
+			uint8_t readBuf[1024];
+			memset(readBuf, 0, sizeof(readBuf));
+			//read input stream
+			NSInteger numberRead = [ (NSInputStream *) theStream 
+									read:readBuf maxLength:1024];
+			//check for errors
+			if (numberRead < 0) 
 			{
-				// null terminate
-				buf[len]='\0';
+				//Get the NSError object from the stream
+				NSError *error = [ (NSInputStream *) theStream 
+								  streamError];
+				//Log the Error
+				NSLog(@"Error -- %@", [error localizedDescription]);
+			}
+			else
+			{
 				
-				// TODO: right now we're just hardcoding the pull out the critical
-				// data set
-				if (buf[0]=='%')
-				{
-					NSString *buffer = [NSString stringWithCString:(const char*)&buf encoding:NSUTF8StringEncoding];
-					//NSLog(@"BUFFER = %@",buffer);
-					NSRange range = [buffer rangeOfString:@"^"];
+				//NSLog(@"Data = %s", readBuf);
+				
+				NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
+				fullbuffer = [fullbuffer stringByAppendingString:buffer];
+				
+				
+							
+			}
+			if(![theStream hasBytesAvailable]){
+				NSLog(@"FINALLY");
+				int myLength = [fullbuffer length];
+				if (myLength > 494) {
+					NSLog(@"WOOHOOOO --------------");
+					/* NSMutableDictionary *event1 = [NSMutableDictionary dictionary];
+					[event1 setValue:fullbuffer forKey:@"fulldata"];
+					//[event1 setValue:len forKey:@"bufflength"];
+					[self fireEvent:@"beginswipe" withObject:event1]; */
+					NSRange range = [fullbuffer rangeOfString:@"^"];
 					if (range.location!=NSNotFound)
 					{
-						NSString *subbuffer = [buffer substringFromIndex:range.location+1]; 
+						NSString *subbuffer = [fullbuffer substringFromIndex:range.location+1]; 
 						range = [subbuffer rangeOfString:@"^"];
 						NSString *fullname = [subbuffer substringToIndex:range.location];
 						range = [fullname rangeOfString:@"/"];
@@ -164,26 +192,40 @@
 						NSArray *tokens = [subbuffer componentsSeparatedByString:@"="];
 						if ([tokens count] > 1)
 						{
-							NSString *maskedCC = [[tokens objectAtIndex:0] stringByReplacingOccurrencesOfString:@"0" withString:@"X"];
+							//NSString *maskedCC = [[tokens objectAtIndex:0] stringByReplacingOccurrencesOfString:@"0" withString:@"X"];
 							NSString *ccExpiry = [[tokens objectAtIndex:1] substringToIndex:4];
 							ccExpiry = [NSString stringWithFormat:@"%c%c/%c%c",[ccExpiry characterAtIndex:2],[ccExpiry characterAtIndex:3],[ccExpiry characterAtIndex:0],[ccExpiry characterAtIndex:1]];
 							NSMutableDictionary *event = [NSMutableDictionary dictionary];
-							NSData *data = [buffer dataUsingEncoding:NSUTF8StringEncoding];
+							NSData *data = [fullbuffer dataUsingEncoding:NSUTF8StringEncoding];
 							TiBlob *blob = [[[TiBlob alloc] initWithData:data mimetype:@"binary/octet-stream"] autorelease];
 							[event setValue:fullname forKey:@"name"];
-							[event setValue:maskedCC forKey:@"cardnumber"];
+							[event setValue:[tokens objectAtIndex:0] forKey:@"cardnumber"];
 							[event setValue:ccExpiry forKey:@"expiration"];
 							[event setValue:blob forKey:@"data"];
 							[self fireEvent:@"swipe" withObject:event];
 						}
 					}
 				}
-            } 
+				
+			}
+		}
             break;
-		}	
-        case NSStreamEventHasSpaceAvailable:
-            break;
+		
 			
+		case NSStreamEventOpenCompleted:
+			NSLog(@"NSStreamEventOpenCompleted :");
+			//NSLog(@"----------- NO MORE BUFFER ----------- %s",_data);
+			break;
+		
+		case NSStreamEventEndEncountered:
+			NSLog(@"**** NSStreamEventEndEncountered ****");
+			fullbuffer = @"";
+			[self fireEvent:@"streamended"];
+			break;
+ 
+		case NSStreamEventHasSpaceAvailable:
+            break;
+		
         default:
             break;
     }
