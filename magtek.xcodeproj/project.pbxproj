@@ -22,13 +22,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24A833651200B2F70026778E /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24A833641200B2F70026778E /* ExternalAccessory.framework */; };
 		24DD6CF91134B3F500162E58 /* TiMagtekModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* TiMagtekModule.h */; };
 		24DD6CFA1134B3F500162E58 /* TiMagtekModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */; };
 		24DE9E1111C5FE74003F90F6 /* TiMagtekModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* TiMagtekModuleAssets.h */; };
 		24DE9E1211C5FE74003F90F6 /* TiMagtekModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* TiMagtekModuleAssets.m */; };
+		7B92777D13A94F9500A440A7 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B92777C13A94F9500A440A7 /* ExternalAccessory.framework */; };
+		7B92777F13A94F9500A440A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B92777E13A94F9500A440A7 /* Foundation.framework */; };
 		AA747D9F0F9514B9006C5449 /* TiMagtek_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */; };
-		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,14 +42,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24A833641200B2F70026778E /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		24DD6CF71134B3F500162E58 /* TiMagtekModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiMagtekModule.h; path = Classes/TiMagtekModule.h; sourceTree = "<group>"; };
 		24DD6CF81134B3F500162E58 /* TiMagtekModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiMagtekModule.m; path = Classes/TiMagtekModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
 		24DE9E0F11C5FE74003F90F6 /* TiMagtekModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TiMagtekModuleAssets.h; path = Classes/TiMagtekModuleAssets.h; sourceTree = "<group>"; };
 		24DE9E1011C5FE74003F90F6 /* TiMagtekModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TiMagtekModuleAssets.m; path = Classes/TiMagtekModuleAssets.m; sourceTree = "<group>"; };
+		7B92777C13A94F9500A440A7 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		7B92777E13A94F9500A440A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiMagtek_Prefix.pch; sourceTree = SOURCE_ROOT; };
-		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libTiMagtek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiMagtek.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -58,8 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
-				24A833651200B2F70026778E /* ExternalAccessory.framework in Frameworks */,
+				7B92777D13A94F9500A440A7 /* ExternalAccessory.framework in Frameworks */,
+				7B92777F13A94F9500A440A7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,8 +88,8 @@
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
-				24A833641200B2F70026778E /* ExternalAccessory.framework */,
+				7B92777C13A94F9500A440A7 /* ExternalAccessory.framework */,
+				7B92777E13A94F9500A440A7 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -255,7 +255,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.3;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -269,7 +270,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_LDFLAGS = "";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.0;
+				SDKROOT = iphoneos4.3;
 			};
 			name = Release;
 		};

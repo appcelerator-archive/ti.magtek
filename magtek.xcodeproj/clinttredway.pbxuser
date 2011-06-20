@@ -1,0 +1,142 @@
+// !$*UTF8*$!
+{
+	0867D690FE84028FC02AAC07 /* Project object */ = {
+		activeBuildConfigurationName = Release;
+		activeTarget = D2AAC07D0554694100DB518D /* magtek */;
+		codeSenseManager = 7B940CA0138B4068008D53E8 /* Code sense */;
+		perUserDictionary = {
+			PBXConfiguration.PBXFileTableDataSource3.PBXFileTableDataSource = {
+				PBXFileTableDataSourceColumnSortingDirectionKey = "-1";
+				PBXFileTableDataSourceColumnSortingKey = PBXFileDataSource_Filename_ColumnID;
+				PBXFileTableDataSourceColumnWidthsKey = (
+					20,
+					1473,
+					20,
+					48,
+					43,
+					43,
+					20,
+				);
+				PBXFileTableDataSourceColumnsKey = (
+					PBXFileDataSource_FiletypeID,
+					PBXFileDataSource_Filename_ColumnID,
+					PBXFileDataSource_Built_ColumnID,
+					PBXFileDataSource_ObjectSize_ColumnID,
+					PBXFileDataSource_Errors_ColumnID,
+					PBXFileDataSource_Warnings_ColumnID,
+					PBXFileDataSource_Target_ColumnID,
+				);
+			};
+			PBXPerProjectTemplateStateSaveDate = 330243665;
+			PBXWorkspaceStateSaveDate = 330243665;
+		};
+		perUserProjectItems = {
+			7B92777413A94DEC00A440A7 /* PBXTextBookmark */ = 7B92777413A94DEC00A440A7 /* PBXTextBookmark */;
+			7B92778A13AA8E4700A440A7 /* PBXTextBookmark */ = 7B92778A13AA8E4700A440A7 /* PBXTextBookmark */;
+			7BA7507A13AF161300733B1E /* PBXTextBookmark */ = 7BA7507A13AF161300733B1E /* PBXTextBookmark */;
+			7BA7509313AF1E7D00733B1E /* PBXTextBookmark */ = 7BA7509313AF1E7D00733B1E /* PBXTextBookmark */;
+			7BBE26C513AF08E400E97C4D /* PBXTextBookmark */ = 7BBE26C513AF08E400E97C4D /* PBXTextBookmark */;
+		};
+		sourceControlManager = 7B940C9F138B4068008D53E8 /* Source Control */;
+		userBuildSettings = {
+		};
+	};
+	24416B8111C4CA220047AFDD /* Build & Test */ = {
+		activeExec = 0;
+	};
+	24DD6CF71134B3F500162E58 /* TiMagtekModule.h */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 836}}";
+			sepNavSelRange = "{446, 0}";
+			sepNavVisRange = "{0, 452}";
+		};
+	};
+	24DD6CF81134B3F500162E58 /* TiMagtekModule.m */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 3731}}";
+			sepNavSelRange = "{5894, 0}";
+			sepNavVisRange = "{3658, 2707}";
+		};
+	};
+	24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 852}}";
+			sepNavSelRange = "{158, 0}";
+			sepNavVisRange = "{0, 478}";
+		};
+	};
+	7B92777413A94DEC00A440A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */;
+		name = "TiMagtek_Prefix.pch: 1";
+		rLen = 0;
+		rLoc = 0;
+		rType = 0;
+		vrLen = 62;
+		vrLoc = 0;
+	};
+	7B92778A13AA8E4700A440A7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+		name = "titanium.xcconfig: 7";
+		rLen = 0;
+		rLoc = 158;
+		rType = 0;
+		vrLen = 478;
+		vrLoc = 0;
+	};
+	7B940C9F138B4068008D53E8 /* Source Control */ = {
+		isa = PBXSourceControlManager;
+		fallbackIsa = XCSourceControlManager;
+		isSCMEnabled = 0;
+		scmConfiguration = {
+			repositoryNamesForRoots = {
+				"" = "";
+			};
+		};
+	};
+	7B940CA0138B4068008D53E8 /* Code sense */ = {
+		isa = PBXCodeSenseManager;
+		indexTemplatePath = "";
+	};
+	7BA7507A13AF161300733B1E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 199";
+		rLen = 0;
+		rLoc = 5894;
+		rType = 0;
+		vrLen = 2764;
+		vrLoc = 3908;
+	};
+	7BA7509313AF1E7D00733B1E /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 199";
+		rLen = 0;
+		rLoc = 5894;
+		rType = 0;
+		vrLen = 2707;
+		vrLoc = 3658;
+	};
+	7BBE26C513AF08E400E97C4D /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF71134B3F500162E58 /* TiMagtekModule.h */;
+		name = "TiMagtekModule.h: 22";
+		rLen = 0;
+		rLoc = 446;
+		rType = 0;
+		vrLen = 452;
+		vrLoc = 0;
+	};
+	AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */ = {
+		uiCtxt = {
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 852}}";
+			sepNavSelRange = "{0, 0}";
+			sepNavVisRange = "{0, 62}";
+		};
+	};
+	D2AAC07D0554694100DB518D /* magtek */ = {
+		activeExec = 0;
+	};
+}
