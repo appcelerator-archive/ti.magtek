@@ -29,8 +29,6 @@
 
 #pragma mark Lifecycle
 
-#pragma mark Lifecycle
-
 -(void)startup
 {
 	// this method is called when the module is first loaded

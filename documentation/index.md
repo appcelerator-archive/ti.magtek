@@ -1,20 +1,14 @@
-<<<<<<< HEAD
-=======
-# magtek Module
+# Ti.Magtek Module
 
 ## Description
 
-The magtek module allows for 
+The Ti.Magtek module allows for
 
-## Accessing the magtek Module
+## Accessing the Ti.Magtek Module
 
 To access this module from JavaScript, you would do the following:
 
-	var magtek = require("ti.magtek");
-
-The magtek variable is a reference to the Module object.	
-
-## Reference
+	Titanium.Magtek = Ti.Magtek = require("ti.magtek");
 
 ## Events 
 
@@ -62,4 +56,4 @@ Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
 ## License
 
 Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
->>>>>>> b9a468610055bc3eb1c8a9011e53d65a12808b04
+
