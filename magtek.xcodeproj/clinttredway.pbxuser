@@ -27,15 +27,28 @@
 					PBXFileDataSource_Target_ColumnID,
 				);
 			};
-			PBXPerProjectTemplateStateSaveDate = 330243665;
-			PBXWorkspaceStateSaveDate = 330243665;
+			PBXPerProjectTemplateStateSaveDate = 330738584;
+			PBXWorkspaceStateSaveDate = 330738584;
 		};
 		perUserProjectItems = {
-			7B92777413A94DEC00A440A7 /* PBXTextBookmark */ = 7B92777413A94DEC00A440A7 /* PBXTextBookmark */;
-			7B92778A13AA8E4700A440A7 /* PBXTextBookmark */ = 7B92778A13AA8E4700A440A7 /* PBXTextBookmark */;
-			7BA7507A13AF161300733B1E /* PBXTextBookmark */ = 7BA7507A13AF161300733B1E /* PBXTextBookmark */;
-			7BA7509313AF1E7D00733B1E /* PBXTextBookmark */ = 7BA7509313AF1E7D00733B1E /* PBXTextBookmark */;
-			7BBE26C513AF08E400E97C4D /* PBXTextBookmark */ = 7BBE26C513AF08E400E97C4D /* PBXTextBookmark */;
+			7B20612B13B8DD5500B989C7 /* XCBuildMessageTextBookmark */ = 7B20612B13B8DD5500B989C7 /* XCBuildMessageTextBookmark */;
+			7B20612C13B8DD5500B989C7 /* PBXTextBookmark */ = 7B20612C13B8DD5500B989C7 /* PBXTextBookmark */;
+			7B20613413B8DD6200B989C7 /* PBXTextBookmark */ = 7B20613413B8DD6200B989C7 /* PBXTextBookmark */;
+			7B20613513B8DD6200B989C7 /* XCBuildMessageTextBookmark */ = 7B20613513B8DD6200B989C7 /* XCBuildMessageTextBookmark */;
+			7B20613613B8DD6200B989C7 /* PBXTextBookmark */ = 7B20613613B8DD6200B989C7 /* PBXTextBookmark */;
+			7B20613B13B8E08300B989C7 /* PBXTextBookmark */ = 7B20613B13B8E08300B989C7 /* PBXTextBookmark */;
+			7B20613E13B8E53D00B989C7 /* PBXTextBookmark */ = 7B20613E13B8E53D00B989C7 /* PBXTextBookmark */;
+			7B20614113B8E68700B989C7 /* PBXTextBookmark */ = 7B20614113B8E68700B989C7 /* PBXTextBookmark */;
+			7B20614413B8E73600B989C7 /* PBXTextBookmark */ = 7B20614413B8E73600B989C7 /* PBXTextBookmark */;
+			7B6E912413B6A5F40014847A = 7B6E912413B6A5F40014847A /* PBXTextBookmark */;
+			7B92777413A94DEC00A440A7 = 7B92777413A94DEC00A440A7 /* PBXTextBookmark */;
+			7B92778A13AA8E4700A440A7 = 7B92778A13AA8E4700A440A7 /* PBXTextBookmark */;
+			7BA7507A13AF161300733B1E = 7BA7507A13AF161300733B1E /* PBXTextBookmark */;
+			7BA7509313AF1E7D00733B1E = 7BA7509313AF1E7D00733B1E /* PBXTextBookmark */;
+			7BAF882513B2AACE003B238B = 7BAF882513B2AACE003B238B /* PBXTextBookmark */;
+			7BAF882613B2AACE003B238B = 7BAF882613B2AACE003B238B /* PBXTextBookmark */;
+			7BAF882713B2AACE003B238B = 7BAF882713B2AACE003B238B /* PBXTextBookmark */;
+			7BBE26C513AF08E400E97C4D = 7BBE26C513AF08E400E97C4D /* PBXTextBookmark */;
 		};
 		sourceControlManager = 7B940C9F138B4068008D53E8 /* Source Control */;
 		userBuildSettings = {
@@ -53,17 +66,115 @@
 	};
 	24DD6CF81134B3F500162E58 /* TiMagtekModule.m */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1651, 3731}}";
-			sepNavSelRange = "{5894, 0}";
-			sepNavVisRange = "{3658, 2707}";
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 3861}}";
+			sepNavSelRange = "{6282, 0}";
+			sepNavVisRange = "{3124, 3190}";
 		};
 	};
 	24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {
 		uiCtxt = {
-			sepNavIntBoundsRect = "{{0, 0}, {1651, 852}}";
-			sepNavSelRange = "{158, 0}";
+			sepNavIntBoundsRect = "{{0, 0}, {1651, 1013}}";
+			sepNavSelRange = "{130, 0}";
 			sepNavVisRange = "{0, 478}";
 		};
+	};
+	7B20612B13B8DD5500B989C7 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'NSStream' may not respond to '-hasBytesAvailable'";
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 158;
+		rType = 1;
+	};
+	7B20612C13B8DD5500B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 159";
+		rLen = 0;
+		rLoc = 4095;
+		rType = 0;
+		vrLen = 696;
+		vrLoc = 3914;
+	};
+	7B20613413B8DD6200B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+		name = "titanium.xcconfig: 7";
+		rLen = 0;
+		rLoc = 130;
+		rType = 0;
+		vrLen = 478;
+		vrLoc = 0;
+	};
+	7B20613513B8DD6200B989C7 /* XCBuildMessageTextBookmark */ = {
+		isa = PBXTextBookmark;
+		comments = "'NSStream' may not respond to '-hasBytesAvailable'";
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		fallbackIsa = XCBuildMessageTextBookmark;
+		rLen = 1;
+		rLoc = 158;
+		rType = 1;
+	};
+	7B20613613B8DD6200B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 159";
+		rLen = 0;
+		rLoc = 4095;
+		rType = 0;
+		vrLen = 3194;
+		vrLoc = 3157;
+	};
+	7B20613B13B8E08300B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 198";
+		rLen = 0;
+		rLoc = 6265;
+		rType = 0;
+		vrLen = 3221;
+		vrLoc = 3132;
+	};
+	7B20613E13B8E53D00B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 198";
+		rLen = 0;
+		rLoc = 6282;
+		rType = 0;
+		vrLen = 3223;
+		vrLoc = 3132;
+	};
+	7B20614113B8E68700B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 156";
+		rLen = 0;
+		rLoc = 3938;
+		rType = 0;
+		vrLen = 3194;
+		vrLoc = 3124;
+	};
+	7B20614413B8E73600B989C7 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 198";
+		rLen = 0;
+		rLoc = 6282;
+		rType = 0;
+		vrLen = 3190;
+		vrLoc = 3124;
+	};
+	7B6E912413B6A5F40014847A /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+		name = "titanium.xcconfig: 7";
+		rLen = 0;
+		rLoc = 130;
+		rType = 0;
+		vrLen = 478;
+		vrLoc = 0;
 	};
 	7B92777413A94DEC00A440A7 /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;
@@ -80,7 +191,7 @@
 		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 		name = "titanium.xcconfig: 7";
 		rLen = 0;
-		rLoc = 158;
+		rLoc = 146;
 		rType = 0;
 		vrLen = 478;
 		vrLoc = 0;
@@ -104,7 +215,7 @@
 		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
 		name = "TiMagtekModule.m: 199";
 		rLen = 0;
-		rLoc = 5894;
+		rLoc = 5841;
 		rType = 0;
 		vrLen = 2764;
 		vrLoc = 3908;
@@ -114,10 +225,40 @@
 		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
 		name = "TiMagtekModule.m: 199";
 		rLen = 0;
-		rLoc = 5894;
+		rLoc = 5841;
 		rType = 0;
 		vrLen = 2707;
 		vrLoc = 3658;
+	};
+	7BAF882513B2AACE003B238B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6CF81134B3F500162E58 /* TiMagtekModule.m */;
+		name = "TiMagtekModule.m: 138";
+		rLen = 0;
+		rLoc = 3385;
+		rType = 0;
+		vrLen = 1656;
+		vrLoc = 0;
+	};
+	7BAF882613B2AACE003B238B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+		name = "titanium.xcconfig: 8";
+		rLen = 0;
+		rLoc = 146;
+		rType = 0;
+		vrLen = 478;
+		vrLoc = 0;
+	};
+	7BAF882713B2AACE003B238B /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
+		name = "titanium.xcconfig: 7";
+		rLen = 0;
+		rLoc = 130;
+		rType = 0;
+		vrLen = 478;
+		vrLoc = 0;
 	};
 	7BBE26C513AF08E400E97C4D /* PBXTextBookmark */ = {
 		isa = PBXTextBookmark;

@@ -327,13 +327,13 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>7BA7509313AF1E7D00733B1E</string>
+										<string>7B20614413B8E73600B989C7</string>
 										<key>history</key>
 										<array>
 											<string>7B92777413A94DEC00A440A7</string>
-											<string>7B92778A13AA8E4700A440A7</string>
 											<string>7BBE26C513AF08E400E97C4D</string>
-											<string>7BA7507A13AF161300733B1E</string>
+											<string>7B20613413B8DD6200B989C7</string>
+											<string>7B20613513B8DD6200B989C7</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -345,14 +345,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 0}, {1712, 860}}</string>
+								<string>{{0, 0}, {1712, 1045}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 59 1920 1119 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
 							<key>Proportion</key>
-							<string>860pt</string>
+							<string>1045pt</string>
 						</dict>
 						<dict>
 							<key>ContentConfiguration</key>
@@ -365,14 +365,14 @@
 							<key>GeometryConfiguration</key>
 							<dict>
 								<key>Frame</key>
-								<string>{{0, 865}, {1712, 213}}</string>
+								<string>{{0, 1050}, {1712, 28}}</string>
 								<key>RubberWindowFrame</key>
 								<string>0 59 1920 1119 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
 							<key>Proportion</key>
-							<string>213pt</string>
+							<string>28pt</string>
 						</dict>
 					</array>
 					<key>Proportion</key>
@@ -391,9 +391,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>7BA7509413AF1E7D00733B1E</string>
+				<string>7B20613713B8DD6200B989C7</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>7BA7509513AF1E7D00733B1E</string>
+				<string>7B20613813B8DD6200B989C7</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -556,7 +556,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>1CD0528F0623707200166675</string>
 								<key>PBXProjectModuleLabel</key>
-								<string></string>
+								<string>TiMagtekModule.m</string>
 								<key>StatusBarVisibility</key>
 								<true/>
 							</dict>
@@ -573,6 +573,8 @@
 							<string>218pt</string>
 						</dict>
 						<dict>
+							<key>BecomeActive</key>
+							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
@@ -612,7 +614,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>7B940CA6138B44FC008D53E8</string>
-				<string>7BA7509613AF1E7D00733B1E</string>
+				<string>7B20612D13B8DD5500B989C7</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
