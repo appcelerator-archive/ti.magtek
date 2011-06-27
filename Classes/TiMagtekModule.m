@@ -136,33 +136,25 @@
 		{
 			NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
 			
-			
 			//create and init input buffer
 			//NSString *tempString;
 			uint8_t readBuf[1024];
 			memset(readBuf, 0, sizeof(readBuf));
 			//read input stream
-			NSInteger numberRead = [ (NSInputStream *) theStream 
-									read:readBuf maxLength:1024];
+			NSInteger numberRead = [ (NSInputStream *) theStream read:readBuf maxLength:1024];
 			//check for errors
 			if (numberRead < 0) 
 			{
 				//Get the NSError object from the stream
-				NSError *error = [ (NSInputStream *) theStream 
-								  streamError];
+				NSError *error = [ (NSInputStream *) theStream streamError];
 				//Log the Error
 				NSLog(@"Error -- %@", [error localizedDescription]);
 			}
 			else
 			{
-				
 				//NSLog(@"Data = %s", readBuf);
-				
 				NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
 				fullbuffer = [fullbuffer stringByAppendingString:buffer];
-				
-				
-							
 			}
 			if(![theStream hasBytesAvailable]){
 				NSLog(@"FINALLY");
@@ -203,6 +195,7 @@
 							[event setValue:ccExpiry forKey:@"expiration"];
 							[event setValue:blob forKey:@"data"];
 							[self fireEvent:@"swipe" withObject:event];
+							fullbuffer = @"";
 						}
 					}
 				}

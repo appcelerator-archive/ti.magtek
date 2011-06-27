@@ -98,13 +98,9 @@ def warn(msg):
 	print "[WARN] %s" % msg	
 
 def validate_license():
-<<<<<<< HEAD
+
 	c = open(os.path.join(cwd,'LICENSE')).read()
 	if c.find(module_license_default)!=1:
-=======
-	c = open('LICENSE').read()
-	if c.find(module_license_default)!=-1:
->>>>>>> b9a468610055bc3eb1c8a9011e53d65a12808b04
 		warn('please update the LICENSE file with your license text before distributing')
 			
 def validate_manifest():
