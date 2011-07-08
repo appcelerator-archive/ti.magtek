@@ -148,13 +148,15 @@
 				//Log the Error
 				NSLog(@"Error -- %@", [error localizedDescription]);
 			}
-			else
+			else if(numberRead > 200)
 			{
 				//NSLog(@"Data = %s", readBuf);
 				NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
 				fullbuffer = [fullbuffer stringByAppendingString:buffer];
+				
 			}
 			if(![theStream hasBytesAvailable]){
+				
 				NSLog(@"FINALLY");
 				int myLength = [fullbuffer length];
 				if (myLength > 494) {
@@ -163,6 +165,8 @@
 					[event1 setValue:fullbuffer forKey:@"fulldata"];
 					//[event1 setValue:len forKey:@"bufflength"];
 					[self fireEvent:@"beginswipe" withObject:event1]; */
+					@try{
+					
 					NSRange range = [fullbuffer rangeOfString:@"^"];
 					if (range.location!=NSNotFound)
 					{
@@ -195,6 +199,11 @@
 							[self fireEvent:@"swipe" withObject:event];
 							fullbuffer = @"";
 						}
+					}
+					} @catch(NSException *e) {
+						NSLog(@"------ **** SWIPE ERROR **** -----");
+						fullbuffer = @"";
+						[self fireEvent:@"swipeError"];
 					}
 				}
 				
