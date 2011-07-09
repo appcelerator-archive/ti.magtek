@@ -150,10 +150,14 @@
 			}
 			else if(numberRead > 200)
 			{
-				//NSLog(@"Data = %s", readBuf);
-				NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
-				fullbuffer = [fullbuffer stringByAppendingString:buffer];
-				
+				@try {
+					//NSLog(@"Data = %s", readBuf);
+					NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
+					fullbuffer = [fullbuffer stringByAppendingString:buffer];
+				} @catch (NSException *e) {
+					fullbuffer = @"";
+					[self fireEvent:@"swipeError"];
+				}
 			}
 			if(![theStream hasBytesAvailable]){
 				
