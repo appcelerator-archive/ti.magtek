@@ -34,7 +34,7 @@
 	// this method is called when the module is first loaded
 	// you *must* call the superclass
 	[super startup];
-	fullbuffer = @"";
+	fullbuffer = [[NSMutableData alloc] initWithLength:0];
 	NSLog(@"[INFO] Magtek iDynamo Reader Module loaded",self);
 }
 
@@ -50,6 +50,7 @@
 	}
 	RELEASE_TO_NIL(session);
 	RELEASE_TO_NIL(accessory);
+	RELEASE_TO_NIL(fullbuffer);
 }
 
 -(void)_destroy
@@ -150,14 +151,10 @@
 			}
 			else if(numberRead > 200)
 			{
-				@try {
-					//NSLog(@"Data = %s", readBuf);
-					NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
-					fullbuffer = [fullbuffer stringByAppendingString:buffer];
-				} @catch (NSException *e) {
-					fullbuffer = @"";
-					[self fireEvent:@"swipeError"];
-				}
+				//NSLog(@"Data = %s", readBuf);
+				//NSString *buffer = [[NSString alloc] initWithBytes:&readBuf length:numberRead encoding:NSUTF8StringEncoding];
+				[fullbuffer appendBytes:&readBuf length:numberRead ];
+				//[buffer dealloc];
 			}
 			if(![theStream hasBytesAvailable]){
 				
@@ -165,16 +162,13 @@
 				int myLength = [fullbuffer length];
 				if (myLength > 494) {
 					NSLog(@"WOOHOOOO --------------");
-					/* NSMutableDictionary *event1 = [NSMutableDictionary dictionary];
-					[event1 setValue:fullbuffer forKey:@"fulldata"];
-					//[event1 setValue:len forKey:@"bufflength"];
-					[self fireEvent:@"beginswipe" withObject:event1]; */
-					@try{
 					
-					NSRange range = [fullbuffer rangeOfString:@"^"];
+					@try{
+						NSString *finalBuffer = [[[NSString alloc] initWithData:fullbuffer encoding:NSUTF8StringEncoding] autorelease];
+						NSRange range = [finalBuffer rangeOfString:@"^"];
 					if (range.location!=NSNotFound)
 					{
-						NSString *subbuffer = [fullbuffer substringFromIndex:range.location+1]; 
+						NSString *subbuffer = [finalBuffer substringFromIndex:range.location+1]; 
 						range = [subbuffer rangeOfString:@"^"];
 						NSString *fullname = [subbuffer substringToIndex:range.location];
 						range = [fullname rangeOfString:@"/"];
@@ -194,19 +188,20 @@
 							NSString *ccExpiry = [[tokens objectAtIndex:1] substringToIndex:4];
 							ccExpiry = [NSString stringWithFormat:@"%c%c/%c%c",[ccExpiry characterAtIndex:2],[ccExpiry characterAtIndex:3],[ccExpiry characterAtIndex:0],[ccExpiry characterAtIndex:1]];
 							NSMutableDictionary *event = [NSMutableDictionary dictionary];
-							NSData *data = [fullbuffer dataUsingEncoding:NSUTF8StringEncoding];
+							NSData *data = [finalBuffer dataUsingEncoding:NSUTF8StringEncoding];
 							TiBlob *blob = [[[TiBlob alloc] initWithData:data mimetype:@"binary/octet-stream"] autorelease];
 							[event setValue:fullname forKey:@"name"];
 							[event setValue:[tokens objectAtIndex:0] forKey:@"cardnumber"];
 							[event setValue:ccExpiry forKey:@"expiration"];
 							[event setValue:blob forKey:@"data"];
 							[self fireEvent:@"swipe" withObject:event];
-							fullbuffer = @"";
+							//[finalBuffer release];
+							[fullbuffer setLength:0];
 						}
 					}
 					} @catch(NSException *e) {
 						NSLog(@"------ **** SWIPE ERROR **** -----");
-						fullbuffer = @"";
+						[fullbuffer setLength:0];
 						[self fireEvent:@"swipeError"];
 					}
 				}
@@ -223,7 +218,7 @@
 		
 		case NSStreamEventEndEncountered:
 			NSLog(@"**** NSStreamEventEndEncountered ****");
-			fullbuffer = @"";
+			[fullbuffer setLength:0];
 			[self fireEvent:@"streamended"];
 			break;
  

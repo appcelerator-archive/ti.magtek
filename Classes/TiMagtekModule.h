@@ -12,12 +12,12 @@
 
 @interface TiMagtekModule : TiModule <NSStreamDelegate>
 {
-	NSString *fullbuffer;
+	NSMutableData *fullbuffer;
 @private
 	EASession *session;
 	NSString *protocol;
 	EAAccessory *accessory;
 }
 
-@property (nonatomic, retain) NSString *fullbuffer;
+@property (nonatomic, retain) NSMutableData *fullbuffer;
 @end
