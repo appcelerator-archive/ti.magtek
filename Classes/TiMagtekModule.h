@@ -19,5 +19,4 @@
 	EAAccessory *accessory;
 }
 
-@property (nonatomic, retain) NSMutableData *fullbuffer;
 @end
