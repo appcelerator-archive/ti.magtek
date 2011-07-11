@@ -192,7 +192,6 @@
 									[event setValue:ccExpiry forKey:@"expiration"];
 									[event setValue:blob forKey:@"data"];
 									[self fireEvent:@"swipe" withObject:event];
-									[fullbuffer setLength:0];
 								}
 							/* } else {
 								[fullbuffer setLength:0];
