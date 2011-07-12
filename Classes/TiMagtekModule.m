@@ -3,6 +3,12 @@
  *
  * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
+ * #############
+ * The reader will always send data in blocks of 500 bytes.  If card data is more than 500 bytes, the 
+ reader will send this using 2 blocks of 500 bytes.  If card data is less than or equal to 500 bytes, 
+ the reader will only send 1 block with 500 bytes.  If data is less than 500 bytes in a block, the 
+ reader will use a lower case ‘x’ (0x78) as padding characters.  Note: The longest message always 
+ fits within 2 blocks
  */
 #import "TiMagtekModule.h"
 #import "TiBase.h"
