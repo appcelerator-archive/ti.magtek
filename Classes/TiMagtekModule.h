@@ -12,11 +12,14 @@
 
 @interface TiMagtekModule : TiModule <NSStreamDelegate>
 {
-	NSMutableData *fullbuffer;
+	//NSMutableData *fullbuffer;
+	NSMutableString *fullbuffer;
 @private
 	EASession *session;
 	NSString *protocol;
 	EAAccessory *accessory;
 }
+
+-(void)parseCardData;
 
 @end
