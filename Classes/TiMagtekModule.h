@@ -12,7 +12,6 @@
 
 @interface TiMagtekModule : TiModule <NSStreamDelegate>
 {
-	//NSMutableData *fullbuffer;
 	NSMutableString *fullbuffer;
 @private
 	EASession *session;

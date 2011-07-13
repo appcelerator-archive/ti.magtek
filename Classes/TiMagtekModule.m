@@ -3,12 +3,6 @@
  *
  * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
- * #############
- * The reader will always send data in blocks of 500 bytes.  If card data is more than 500 bytes, the 
- reader will send this using 2 blocks of 500 bytes.  If card data is less than or equal to 500 bytes, 
- the reader will only send 1 block with 500 bytes.  If data is less than 500 bytes in a block, the 
- reader will use a lower case ‘x’ (0x78) as padding characters.  Note: The longest message always 
- fits within 2 blocks
  */
 #import "TiMagtekModule.h"
 #import "TiBase.h"
@@ -40,7 +34,6 @@
 	// you *must* call the superclass
 	fullbuffer =  [[NSMutableString alloc] init];
 	[super startup];
-	//fullbuffer = [[NSMutableData alloc] initWithLength:0];
 	NSLog(@"[INFO] Magtek iDynamo Reader Module loaded",self);
 }
 
@@ -139,6 +132,18 @@
     {
         case NSStreamEventHasBytesAvailable:
 		
+			/* 
+			   From the MagTek iDynamo MagneSafe V5 Communication Reference Manual
+			 
+			   The reader will always send data in blocks of 500 bytes.  If card data is more than 500 bytes, the 
+			   reader will send this using 2 blocks of 500 bytes.  If card data is less than or equal to 500 bytes, 
+			   the reader will only send 1 block with 500 bytes.  If data is less than 500 bytes in a block, the 
+			   reader will use a lower case ‘x’ (0x78) as padding characters.  Note: The longest message always 
+			   fits within 2 blocks.
+			 
+		  	   A Swipe Message is composed of readable ASCII characters.
+			*/
+			
 			NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
 			uint8_t readBuf[1024];
 			memset(readBuf, 0, sizeof(readBuf));
@@ -228,23 +233,15 @@
 				[event setValue:blob forKey:@"data"];
 				[self fireEvent:@"swipe" withObject:event];
 			} else {
-				NSMutableDictionary *event = [NSMutableDictionary dictionary];
-				[event setValue:@"token count" forKey:@"message"];
 				[self fireEvent:@"swipeError"];
 			}
 		} else {
-			NSString *message = [NSString stringWithFormat:@"not found"];
-			NSMutableDictionary *event = [NSMutableDictionary dictionary];
-			[event setValue:message forKey:@"message"];
-			[self fireEvent:@"swipeError" withObject:event];
+			[self fireEvent:@"swipeError"];
 		}
 		
 	} @catch(NSException *e) {
 		NSLog(@"------ **** SWIPE ERROR **** -----");
-		NSString *message = [NSString stringWithFormat:@"exception"];
-		NSMutableDictionary *event = [NSMutableDictionary dictionary];
-		[event setValue:message forKey:@"message"];
-		[self fireEvent:@"swipeError" withObject:event];
+		[self fireEvent:@"swipeError"];
 	} @finally {
 		[fullbuffer setString:@""];
 	}

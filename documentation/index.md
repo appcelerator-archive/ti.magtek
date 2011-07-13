@@ -45,6 +45,10 @@ cardnumber[string]: The (masked) card number
 expiration[string]: The expiration date, in xx/xx format.  
 data[object]: A blob representing the data on the magstripe of the card.  
 
+### swipeError
+
+Fired when a card error is detected during the swipe. This event is triggered when errors are detected composing the data for the swipe event. You will need to analyze the full data blob for all possible errors.   
+  
 ## Usage
 
 See example.
