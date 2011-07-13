@@ -181,7 +181,7 @@
 		case NSStreamEventEndEncountered:
 			NSLog(@"**** NSStreamEventEndEncountered ****");
 			[fullbuffer setString:@""];
-			[self fireEvent:@"streamended"];
+			[self fireEvent:@"disconnected"];
 			break;
  
 		case NSStreamEventHasSpaceAvailable:
@@ -220,25 +220,31 @@
 				NSString *ccExpiry = [[tokens objectAtIndex:1] substringToIndex:4];
 				ccExpiry = [NSString stringWithFormat:@"%c%c/%c%c",[ccExpiry characterAtIndex:2],[ccExpiry characterAtIndex:3],[ccExpiry characterAtIndex:0],[ccExpiry characterAtIndex:1]];
 				NSMutableDictionary *event = [NSMutableDictionary dictionary];
-				TiBlob *blob = [[[TiBlob alloc] initWithData:fullbuffer mimetype:@"binary/octet-stream"] autorelease];
+				NSData *data = [fullbuffer dataUsingEncoding:NSUTF8StringEncoding];
+				TiBlob *blob = [[[TiBlob alloc] initWithData:data mimetype:@"binary/octet-stream"] autorelease];
 				[event setValue:fullname forKey:@"name"];
 				[event setValue:[tokens objectAtIndex:0] forKey:@"cardnumber"];
 				[event setValue:ccExpiry forKey:@"expiration"];
 				[event setValue:blob forKey:@"data"];
 				[self fireEvent:@"swipe" withObject:event];
+			} else {
+				NSMutableDictionary *event = [NSMutableDictionary dictionary];
+				[event setValue:@"token count" forKey:@"message"];
+				[self fireEvent:@"swipeError"];
 			}
-			
-			
 		} else {
-			[fullbuffer setString:@""];
-			[self fireEvent:@"swipeError"];
-			return;
+			NSString *message = [NSString stringWithFormat:@"not found"];
+			NSMutableDictionary *event = [NSMutableDictionary dictionary];
+			[event setValue:message forKey:@"message"];
+			[self fireEvent:@"swipeError" withObject:event];
 		}
 		
 	} @catch(NSException *e) {
 		NSLog(@"------ **** SWIPE ERROR **** -----");
-		[fullbuffer setString:@""];
-		[self fireEvent:@"swipeError"];
+		NSString *message = [NSString stringWithFormat:@"exception"];
+		NSMutableDictionary *event = [NSMutableDictionary dictionary];
+		[event setValue:message forKey:@"message"];
+		[self fireEvent:@"swipeError" withObject:event];
 	} @finally {
 		[fullbuffer setString:@""];
 	}
