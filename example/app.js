@@ -8,18 +8,46 @@
 var window = Ti.UI.createWindow({
   backgroundColor:'white'
 });
+
+var logView = Titanium.UI.createTextField({
+    color:'#336699',
+    value:'Log View',
+    height:200,
+    top:10,
+    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
+});
+
+window.add(logView);
+
 window.open();
+
+var buffer = '';
+var cnt = 0;
+var eventFireNum = 1;
 
 // TODO: write your module tests here
 var magtek = require('ti.magtek');
-Ti.API.info("module is => "+magtek);
+//alert("module is => "+magtek);
+ magtek.registerDevice('com.appcelerator.magtek');
 
 magtek.addEventListener('connected', function(e) {
-	Ti.API.log('Device connected: ' + e.name);
+    logView.value += '\n\r Connected: ' + e.name + '\n\r';
+   // alert("Connected");
 });
 magtek.addEventListener('disconnected', function(e) {
-	Ti.API.log('Device disconnected: ' + e.name);
+	logView.value += '\r\n Disconnected: ' + e.name;
 });
 magtek.addEventListener('swipe', function(e) {
-	Ti.API.log('Swiped card: '+e.cardnumber);
+	//alert('SWIPE');
+	var str = 'Name: ' + e.name + " Exp: " + e.expiration;
+	alert(str);
+});
+
+magtek.addEventListener('swipeError',function(e){
+	alert(e.message);
+});
+
+magtek.addEventListener('streamended', function(e) {
+	alert('STREAM ENDED');
+	
 });
