@@ -175,7 +175,7 @@
 			break;
 		case NSStreamEventErrorOccurred:
 			[theStream close];
-			[theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+			[theStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 			[theStream release];
 			theStream = nil;
 			[fullbuffer setString:@""];
