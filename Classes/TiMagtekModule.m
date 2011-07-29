@@ -49,7 +49,7 @@
 	}
 	RELEASE_TO_NIL(session);
 	RELEASE_TO_NIL(accessory);
-	RELEASE_TO_NIL(fullbuffer);
+	
 }
 
 -(void)_destroy
@@ -72,7 +72,7 @@
 -(void)dealloc
 {
 	[self cleanup];
-	
+	RELEASE_TO_NIL(fullbuffer);
 	// release any resources that have been retained by the module
 	[super dealloc];
 }
@@ -174,6 +174,10 @@
 		
 			break;
 		case NSStreamEventErrorOccurred:
+			[theStream close];
+			[theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+			[theStream release];
+			theStream = nil;
 			[fullbuffer setString:@""];
 			[self fireEvent:@"swipeError"];
 			break;
