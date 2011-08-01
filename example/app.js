@@ -9,21 +9,26 @@ var window = Ti.UI.createWindow({
   backgroundColor:'white'
 });
 
-var logView = Titanium.UI.createTextField({
-    color:'#336699',
-    value:'Log View',
-    height:200,
-    top:10,
-    borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED
-});
+var titleBar = Ti.UI.createView({width:300,height:50,backgroundColor:'#000',top:20});
+window.add(titleBar);
 
-window.add(logView);
+var title_lbl = Ti.UI.createLabel({text:'Card Information:',color:'#FFF',height:40,left:10});
+titleBar.add(title_lbl);
 
-window.open();
+var info_vw = Ti.UI.createView({width:300,height:300,top:72,borderRadius:2});
+window.add(info_vw);
 
-var buffer = '';
-var cnt = 0;
-var eventFireNum = 1;
+var name_lbl = Ti.UI.createLabel({text:'Name: ',height:35,top:5});
+info_vw.add(name_lbl);
+
+var card_lbl = Ti.UI.createLabel({text:'#: ',height:35,top:45});
+info_vw.add(card_lbl);
+
+var exp_lbl = Ti.UI.createLabel({text:'Exp: ',height:35,top:85});
+info_vw.add(exp_lbl);
+
+var status_lbl = Ti.UI.createLabel({text:"Status: "});
+window.add(status_lbl);
 
 // TODO: write your module tests here
 var magtek = require('ti.magtek');
@@ -31,23 +36,32 @@ var magtek = require('ti.magtek');
  magtek.registerDevice('com.appcelerator.magtek');
 
 magtek.addEventListener('connected', function(e) {
-    logView.value += '\n\r Connected: ' + e.name + '\n\r';
-   // alert("Connected");
+   status_lbl.text = 'Status: Connected';
 });
 magtek.addEventListener('disconnected', function(e) {
-	logView.value += '\r\n Disconnected: ' + e.name;
+	name_lbl.text = 'Name: ';
+	card_lbl.text = '#: ';
+	exp_lbl.text = 'Exp: ';
+	status_lbl.text = 'Status: Disconnected';
 });
 magtek.addEventListener('swipe', function(e) {
-	//alert('SWIPE');
-	var str = 'Name: ' + e.name + " Exp: " + e.expiration;
-	alert(str);
+	name_lbl.text = 'Name: ' + e.name;
+	card_lbl.text = '#: ' + e.cardnumber;
+	exp_lbl.text = 'Exp: ' + e.expiration;
+	status_lbl.text = "Status: GOOD SWIPE";
 });
 
 magtek.addEventListener('swipeError',function(e){
-	alert(e.message);
+	status_lbl.text = "Status: ERROR";
+	name_lbl.text = 'Name: ';
+	card_lbl.text = '#: ';
+	exp_lbl.text = 'Exp: ';
 });
 
-magtek.addEventListener('streamended', function(e) {
-	alert('STREAM ENDED');
-	
+Titanium.App.addEventListener('resume',function(e)
+{
+	alert('RESUMED');
+	magtek.resumeConnection();
 });
+
+window.open();

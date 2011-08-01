@@ -42,10 +42,10 @@
 	if (session!=nil)
 	{
 		[[session inputStream] setDelegate:nil];
-		[[session outputStream] setDelegate:nil];
+		//[[session outputStream] setDelegate:nil];
 		
 		[[session inputStream] close];
-		[[session outputStream] close];
+		//[[session outputStream] close];
 	}
 	RELEASE_TO_NIL(session);
 	RELEASE_TO_NIL(accessory);
@@ -92,16 +92,16 @@
 {
 	if(session)
 	{
-		NSLog(@"--- CLOSING OPEN SESSION ---");
+		//NSLog(@"--- CLOSING OPEN SESSION ---");
 		[NSThread sleepForTimeInterval:1.0];
 		
 		[[session inputStream] close];
-		[[session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		[[session inputStream] removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 		[[session inputStream] setDelegate:nil];
 		
-		[[session outputStream] close];
+		/*[[session outputStream] close];
 		[[session outputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-		[[session outputStream] setDelegate:nil];
+		[[session outputStream] setDelegate:nil];*/
 		
 		[session release];
 		session = nil;
@@ -111,18 +111,18 @@
 - (BOOL)openSessionForProtocol:(NSString *)protocolString
 {
 	
-	NSLog(@"----- OPENING SESSION ---");
+	//NSLog(@"----- OPENING SESSION ---");
     NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager]
 							connectedAccessories];
 	
     for (EAAccessory *obj in accessories)
     {
-		NSLog(@"ACCESSORY INSTALLED = %@",obj);
+		//NSLog(@"ACCESSORY INSTALLED = %@",obj);
 		
         if ([[obj protocolStrings] containsObject:protocolString])
         {
             accessory = [obj retain];
-			NSLog(@"FOUND ACCESSORY = %@",accessory);
+			//NSLog(@"FOUND ACCESSORY = %@",accessory);
             break;
         }
     }
@@ -137,10 +137,10 @@
             [[session inputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
 											 forMode:NSDefaultRunLoopMode];
             [[session inputStream] open];
-            [[session outputStream] setDelegate:self];
+            /*[[session outputStream] setDelegate:self];
             [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
 											  forMode:NSDefaultRunLoopMode];
-            [[session outputStream] open];
+            [[session outputStream] open];*/
         }
     }
 	
@@ -166,7 +166,7 @@
 		  	   A Swipe Message is composed of readable ASCII characters.
 			*/
 			
-			NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
+			//NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
 			uint8_t readBuf[1024];
 			memset(readBuf, 0, sizeof(readBuf));
 			//read input stream
@@ -205,12 +205,12 @@
 			break;
 			
 		case NSStreamEventOpenCompleted:
-			NSLog(@"NSStreamEventOpenCompleted :");
+			//NSLog(@"NSStreamEventOpenCompleted :");
 			//NSLog(@"----------- NO MORE BUFFER ----------- %s",_data);
 			break;
 		
 		case NSStreamEventEndEncountered:
-			NSLog(@"**** NSStreamEventEndEncountered ****");
+			//NSLog(@"**** NSStreamEventEndEncountered ****");
 			[fullbuffer setString:@""];
 			
 			[self fireEvent:@"disconnected"];
@@ -267,7 +267,7 @@
 		}
 		
 	} @catch(NSException *e) {
-		NSLog(@"------ **** SWIPE ERROR **** -----");
+		//NSLog(@"------ **** SWIPE ERROR **** -----");
 		[self fireEvent:@"swipeError"];
 	} @finally {
 		[fullbuffer setString:@""];
@@ -291,7 +291,7 @@
 
 -(void)deviceConnected:(NSNotification*)note
 {
-	NSLog(@"DEVICE CONNECTED = %@",note);
+	//NSLog(@"DEVICE CONNECTED = %@",note);
 	
 	[self cleanup];
 	
@@ -306,7 +306,7 @@
 
 -(void)deviceDisconnected:(NSNotification*)note
 {
-	NSLog(@"DEVICE DISCONNECTED = %@",note);
+	//NSLog(@"DEVICE DISCONNECTED = %@",note);
 	[self closeSession];
 	EAAccessory *accessory_ = [[note userInfo] objectForKey:EAAccessoryKey];
 	if ([accessory_ isEqual:accessory])
@@ -336,7 +336,7 @@
 	
 	[self openSessionForProtocol:protocol];
 	
-	NSLog(@"OPEN SESSION = %@, %@",session,accessory);
+	//NSLog(@"OPEN SESSION = %@, %@",session,accessory);
 	
 	if (session!=nil && accessory!=nil)
 	{
@@ -348,7 +348,7 @@
 -(void)resumeConnection:(id)args
 {	
 	[self closeSession];
-	NSLog(@" %@",protocol);
+	//NSLog(@" %@",protocol);
 	[self openSessionForProtocol:protocol];
 	
 }
