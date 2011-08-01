@@ -88,8 +88,30 @@
 
 #pragma mark Device
 
+- (void)closeSession
+{
+	if(session)
+	{
+		NSLog(@"--- CLOSING OPEN SESSION ---");
+		[NSThread sleepForTimeInterval:1.0];
+		
+		[[session inputStream] close];
+		[[session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		[[session inputStream] setDelegate:nil];
+		
+		[[session outputStream] close];
+		[[session outputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+		[[session outputStream] setDelegate:nil];
+		
+		[session release];
+		session = nil;
+	}
+}
+
 - (BOOL)openSessionForProtocol:(NSString *)protocolString
 {
+	
+	NSLog(@"----- OPENING SESSION ---");
     NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager]
 							connectedAccessories];
 	
@@ -115,10 +137,10 @@
             [[session inputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
 											 forMode:NSDefaultRunLoopMode];
             [[session inputStream] open];
-            //[[session outputStream] setDelegate:self];
-           // [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
-			//								  forMode:NSDefaultRunLoopMode];
-            //[[session outputStream] open];
+            [[session outputStream] setDelegate:self];
+            [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
+											  forMode:NSDefaultRunLoopMode];
+            [[session outputStream] open];
         }
     }
 	
@@ -190,6 +212,7 @@
 		case NSStreamEventEndEncountered:
 			NSLog(@"**** NSStreamEventEndEncountered ****");
 			[fullbuffer setString:@""];
+			
 			[self fireEvent:@"disconnected"];
 			break;
  
@@ -284,7 +307,7 @@
 -(void)deviceDisconnected:(NSNotification*)note
 {
 	NSLog(@"DEVICE DISCONNECTED = %@",note);
-	
+	[self closeSession];
 	EAAccessory *accessory_ = [[note userInfo] objectForKey:EAAccessoryKey];
 	if ([accessory_ isEqual:accessory])
 	{
@@ -309,6 +332,7 @@
 	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
 	[center addObserver:self selector:@selector(deviceConnected:) name:EAAccessoryDidConnectNotification object:nil];
 	[center addObserver:self selector:@selector(deviceDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
+	//[center addObserver:self selector:@selector(deviceConnected:) name:kTiResumeNotification object:nil];
 	
 	[self openSessionForProtocol:protocol];
 	
@@ -319,6 +343,14 @@
 		NSDictionary *event = [self accessoryToDictionary:accessory];
 		[self fireEvent:@"connected" withObject:event];
 	}
+}
+
+-(void)resumeConnection:(id)args
+{	
+	[self closeSession];
+	NSLog(@" %@",protocol);
+	[self openSessionForProtocol:protocol];
+	
 }
 
 @end
