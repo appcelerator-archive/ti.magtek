@@ -166,7 +166,7 @@
 		  	   A Swipe Message is composed of readable ASCII characters.
 			*/
 			
-			//NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
+			NSLog(@"------- NSStreamEventHasBytesAvailable ---------");
 			uint8_t readBuf[1024];
 			memset(readBuf, 0, sizeof(readBuf));
 			//read input stream
