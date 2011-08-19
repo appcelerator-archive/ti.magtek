@@ -1,9 +1,19 @@
 /**
  * Magtek Module
  *
- * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
+ * Appcelerator Titanium is Copyright (c) 2009-2011 by Appcelerator, Inc.
  * and licensed under the Apache Public License (version 2)
  */
+
+// See the book "Building IPhone OS Accessories: Use the IPhone Accessories API to Control"
+// by Ken Maskrey for great coverage on developing Accessories. Chapter 2 is especiallyl
+// relevant to this module.
+
+// *******************************************************************************************
+// NOTE: For the MagTek device that Appcelerator has for testing, the protocol
+// is 'com.appcelerator.magtek'. Use that value in the sample app when calling registerDevice.
+// *******************************************************************************************
+
 #import "TiMagtekModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
@@ -29,52 +39,38 @@
 #pragma mark Lifecycle
 
 -(void)startup
-{
-	// this method is called when the module is first loaded
+{	
+	// This method is called when the module is first loaded
 	// you *must* call the superclass
-	fullbuffer =  [[NSMutableString alloc] init];
+	
 	[super startup];
+	
 	NSLog(@"[INFO] Magtek iDynamo Reader Module loaded",self);
 }
 
--(void)cleanup
-{
-	if (session!=nil)
-	{
-		[[session inputStream] setDelegate:nil];
-		//[[session outputStream] setDelegate:nil];
-		
-		[[session inputStream] close];
-		//[[session outputStream] close];
-	}
-	RELEASE_TO_NIL(session);
-	RELEASE_TO_NIL(accessory);
-	
+-(id)init
+{	
+	// Allocate memory to hold the data from the reader
+	fullbuffer =  [[NSMutableString alloc] init];
+
+	// Register for accessory notifications
+	[self turnConnectionNotificationsOn];
+
+	return [super init];
 }
 
 -(void)_destroy
 {
-	[self cleanup];
+	// This method is called from the dealloc method and is good place to
+	// release any objects and memory that have been allocated for the module.
 	
-	// this method is called when the module is being unloaded
-	// typically this is during shutdown. make sure you don't do too
-	// much processing here or the app will be quit forceably
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
-	[center removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
+	[self closeSession];
+	[self turnConnectionNotificationsOff];
 	
-	// you *must* call the superclass
-	[super _destroy];
-}
-
-#pragma mark Cleanup 
-
--(void)dealloc
-{
-	[self cleanup];
 	RELEASE_TO_NIL(fullbuffer);
-	// release any resources that have been retained by the module
-	[super dealloc];
+	RELEASE_TO_NIL(protocol);
+	
+	[super _destroy];
 }
 
 #pragma mark Internal Memory Management
@@ -88,63 +84,152 @@
 
 #pragma mark Device
 
-- (void)closeSession
+-(void)turnConnectionNotificationsOn
 {
-	if(session)
-	{
-		//NSLog(@"--- CLOSING OPEN SESSION ---");
-		[NSThread sleepForTimeInterval:1.0];
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center addObserver:self selector:@selector(deviceConnected:) name:EAAccessoryDidConnectNotification object:nil];
+	[center addObserver:self selector:@selector(deviceDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
+	
+	[[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
+}
+
+-(void)turnConnectionNotificationsOff
+{
+	[[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
+	
+	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+	[center removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
+	[center removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
+}
+
+-(void)openStreams
+{
+	// *** ULTRA-IMPORTANT ***
+	// Eventhough we do not use the outputStream, we must open the output stream in order for application
+	// suspend / resume to work. Without opening and closing the output stream for the session everything
+	// will appear to work, however the session will fail to be restarted when the application returns
+	// from being suspended.
+	
+	[[session inputStream] setDelegate:self];
+	[[session inputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+	[[session inputStream] open];
+	
+	[[session outputStream] setDelegate:self];
+	[[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+	[[session outputStream] open];
+}
+
+-(void)closeStreams
+{
+	[NSThread sleepForTimeInterval:1.0];
+	
+	[[session inputStream] close];
+	[[session inputStream] removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+	[[session inputStream] setDelegate:nil];
+	
+	[[session outputStream] close];
+	[[session outputStream] removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+	[[session outputStream] setDelegate:nil];
+}
+
+// NOTE: The 'protocol' that is being referred to here is not a normal protocol in the Obj-c sense.
+// The protocol is essentially an agreement between the hardware accessory and the application about
+// the type of device, the data that it will send/received, etc. The protocol is defined by the
+// physical device and is specified by the application calling registerDevice.
+
+-(EAAccessory*)accessoryForProtocol:(NSString*)protocolString
+{
+    NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager]	connectedAccessories];
+	
+    for (EAAccessory *obj in accessories) {
+        if ([[obj protocolStrings] containsObject:protocolString]) {
+			return (obj);
+        }
+    }	
+	
+	return nil;
+}
+
+-(BOOL)openSessionForProtocol:(NSString *)protocolString withAccessory:(EAAccessory*)acc
+{
+	// Make sure any existing session is closed
+	[self closeSession];
+	
+    if (acc) {
+        session = [[EASession alloc] initWithAccessory:acc forProtocol:protocolString];
+        if (session) {
+			[self openStreams];
+
+			// Send event notification
+			NSDictionary *event = [self accessoryToDictionary:acc];
+			[self fireEvent:@"connected" withObject:event];
+ 		}
+    }
 		
-		[[session inputStream] close];
-		[[session inputStream] removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-		[[session inputStream] setDelegate:nil];
+    return session!=nil;
+}
+
+-(void)closeSession
+{
+	if(session) {
+		[self closeStreams];
 		
-		/*[[session outputStream] close];
-		[[session outputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-		[[session outputStream] setDelegate:nil];*/
-		
-		[session release];
-		session = nil;
+		// The following may generate an error in the console log if the physical device
+		// has been removed. This error is not generated when this method is called as a
+		// result of the application moving to the background.
+		RELEASE_TO_NIL(session);
 	}
 }
 
-- (BOOL)openSessionForProtocol:(NSString *)protocolString
+#pragma mark Notifications
+
+-(NSMutableDictionary*)accessoryToDictionary:(EAAccessory*)accessory_
 {
+	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+	[dict setValue:NUMINT([accessory_ connectionID]) forKey:@"connectionId"];
+	[dict setValue:[accessory_ name] forKey:@"name"];
+	[dict setValue:[accessory_ manufacturer] forKey:@"manufacturer"];
+	[dict setValue:[accessory_ modelNumber] forKey:@"modelNumber"];
+	[dict setValue:[accessory_ name] forKey:@"name"];
+	[dict setValue:[accessory_ serialNumber] forKey:@"serialNumber"];
+	[dict setValue:[accessory_ hardwareRevision] forKey:@"hardwareRevision"];
+	[dict setValue:[accessory_ firmwareRevision] forKey:@"firmwareRevision"];
 	
-	//NSLog(@"----- OPENING SESSION ---");
-    NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager]
-							connectedAccessories];
-	
-    for (EAAccessory *obj in accessories)
-    {
-		//NSLog(@"ACCESSORY INSTALLED = %@",obj);
+	return dict;	
+}
+
+-(void)deviceConnected:(NSNotification*)note
+{
+	EAAccessory *acc = [[note userInfo] objectForKey:EAAccessoryKey];
 		
-        if ([[obj protocolStrings] containsObject:protocolString])
-        {
-            accessory = [obj retain];
-			//NSLog(@"FOUND ACCESSORY = %@",accessory);
-            break;
-        }
-    }
+	// If this accessory is for the specified protocol, then open a session for accessing it.
+	// We do not want to blindly call openSessionForProtocol since the attached accessory
+	// may be for a different protocol AND in the future when Apple allows multiple devices
+	// to be attached we don't want to be closing and re-opening a session whenever a 2nd
+	// device is attached.
 	
-    if (accessory)
-    {
-        session = [[EASession alloc] initWithAccessory:accessory
-										   forProtocol:protocolString];
-        if (session)
-        {
-            [[session inputStream] setDelegate:self];
-            [[session inputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
-											 forMode:NSDefaultRunLoopMode];
-            [[session inputStream] open];
-            /*[[session outputStream] setDelegate:self];
-            [[session outputStream] scheduleInRunLoop:[NSRunLoop mainRunLoop]
-											  forMode:NSDefaultRunLoopMode];
-            [[session outputStream] open];*/
-        }
-    }
+	// Check for protocol being set just in case device connection notifications are received
+	// before the app calls registerDevice.
+	if ((protocol != nil) && [[acc protocolStrings] containsObject:protocol]) {
+		[self openSessionForProtocol:protocol withAccessory:acc];
+	}
+}
+
+-(void)deviceDisconnected:(NSNotification*)note
+{
+	EAAccessory *acc = [[note userInfo] objectForKey:EAAccessoryKey];
 	
-    return session!=nil;
+	// If we have a currently opened session and the connection ID for the accessory that
+	// is notifying us is the same as the accessory for the session, then close the session.
+	// We can't assume that there is only one accessory connection because Apple may allow
+	// multiple accessories to be connected in the future -- thus the check for the connectionID
+	if ((session != nil) && (session.accessory.connectionID == acc.connectionID)) {
+		[self closeSession];
+		
+		// Send event notification
+		NSDictionary *event = [self accessoryToDictionary:acc];
+		[self fireEvent:@"disconnected" withObject:event];
+	}
 }
 
 - (void)stream:(NSStream*)theStream handleEvent:(NSStreamEvent)streamEvent
@@ -172,7 +257,7 @@
 			//read input stream
 			NSInteger numberRead = [ (NSInputStream *) theStream read:readBuf maxLength:1024];
 			NSString *tempString = [[NSString alloc] initWithFormat:@"%s",readBuf];
-			if(waitForMoreData){
+			if(waitForMoreData) {
 				[fullbuffer appendString:tempString];
 				waitForMoreData = NO;
 				[self parseCardData];
@@ -180,64 +265,57 @@
 				[fullbuffer setString:@""];
 				[fullbuffer appendString:tempString];
 				
-				if([tempString characterAtIndex:numberRead-1] !='x'){
+				if([tempString characterAtIndex:numberRead-1] !='x') {
 					//more data is coming so we need to wait for it
 					waitForMoreData = YES;
 				} else {
 					[self parseCardData];
 				}
-
 			} else {
 				[fullbuffer setString:@""];
 				[fullbuffer appendString:tempString];
 				[self parseCardData];
 			}
 			[tempString release];
-		
 			break;
-		case NSStreamEventErrorOccurred:
-			[theStream close];
-			[theStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-			[theStream release];
-			theStream = nil;
+			
+		case NSStreamEventErrorOccurred:			
+			[self closeStreams];
 			[fullbuffer setString:@""];
+			
 			[self fireEvent:@"swipeError"];
+			break;
+
+		case NSStreamEventEndEncountered:
+			// This notification is received when the stream is closed at the other end of the pipe. 
+			// Typically this occurs when the application is moved to the background.
+			[fullbuffer setString:@""];
+			break;
+			
+		case NSStreamEventNone:
 			break;
 			
 		case NSStreamEventOpenCompleted:
-			//NSLog(@"NSStreamEventOpenCompleted :");
-			//NSLog(@"----------- NO MORE BUFFER ----------- %s",_data);
 			break;
 		
-		case NSStreamEventEndEncountered:
-			//NSLog(@"**** NSStreamEventEndEncountered ****");
-			[fullbuffer setString:@""];
-			
-			[self fireEvent:@"disconnected"];
-			break;
- 
 		case NSStreamEventHasSpaceAvailable:
             break;
 		
         default:
             break;
     }
-	
 }
 
 -(void)parseCardData
 {
 	@try{
-		
 		NSRange range = [fullbuffer rangeOfString:@"^"];
-		if (range.location!=NSNotFound)
-		{
+		if (range.location!=NSNotFound)	{
 			NSString *subbuffer = [fullbuffer substringFromIndex:range.location+1]; 
 			range = [subbuffer rangeOfString:@"^"];
 			NSString *fullname = [subbuffer substringToIndex:range.location];
 			range = [fullname rangeOfString:@"/"];
-			if (range.location!=NSNotFound)
-			{
+			if (range.location!=NSNotFound)	{
 				NSString *first = [fullname substringFromIndex:range.location+1];
 				NSString *last = [fullname substringToIndex:range.location];
 				fullname = [NSString stringWithFormat:@"%@ %@",first,last];
@@ -247,8 +325,7 @@
 			subbuffer = [subbuffer substringFromIndex:range.location+1];
 			
 			NSArray *tokens = [subbuffer componentsSeparatedByString:@"="];
-			if ([tokens count] > 1)
-			{
+			if ([tokens count] > 1)	{
 				NSString *ccExpiry = [[tokens objectAtIndex:1] substringToIndex:4];
 				ccExpiry = [NSString stringWithFormat:@"%c%c/%c%c",[ccExpiry characterAtIndex:2],[ccExpiry characterAtIndex:3],[ccExpiry characterAtIndex:0],[ccExpiry characterAtIndex:1]];
 				NSMutableDictionary *event = [NSMutableDictionary dictionary];
@@ -267,55 +344,9 @@
 		}
 		
 	} @catch(NSException *e) {
-		//NSLog(@"------ **** SWIPE ERROR **** -----");
 		[self fireEvent:@"swipeError"];
 	} @finally {
 		[fullbuffer setString:@""];
-	}
-	
-}
-
--(NSMutableDictionary*)accessoryToDictionary:(EAAccessory*)accessory_
-{
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-	[dict setValue:NUMINT([accessory_ connectionID]) forKey:@"connectionId"];
-	[dict setValue:[accessory_ name] forKey:@"name"];
-	[dict setValue:[accessory_ manufacturer] forKey:@"manufacturer"];
-	[dict setValue:[accessory_ modelNumber] forKey:@"modelNumber"];
-	[dict setValue:[accessory_ name] forKey:@"name"];
-	[dict setValue:[accessory_ serialNumber] forKey:@"serialNumber"];
-	[dict setValue:[accessory_ hardwareRevision] forKey:@"hardwareRevision"];
-	[dict setValue:[accessory_ firmwareRevision] forKey:@"firmwareRevision"];
-	return dict;
-}
-
--(void)deviceConnected:(NSNotification*)note
-{
-	//NSLog(@"DEVICE CONNECTED = %@",note);
-	
-	[self cleanup];
-	
-	[self openSessionForProtocol:protocol];
-	if (session!=nil)
-	{
-		accessory = [[[note userInfo] objectForKey:EAAccessoryKey] retain];
-		NSDictionary *event = [self accessoryToDictionary:accessory];
-		[self fireEvent:@"connected" withObject:event];
-	}
-}
-
--(void)deviceDisconnected:(NSNotification*)note
-{
-	//NSLog(@"DEVICE DISCONNECTED = %@",note);
-	[self closeSession];
-	EAAccessory *accessory_ = [[note userInfo] objectForKey:EAAccessoryKey];
-	if ([accessory_ isEqual:accessory])
-	{
-		NSDictionary *event = [self accessoryToDictionary:accessory];
-		[self fireEvent:@"disconnected" withObject:event];
-		
-		RELEASE_TO_NIL(session);
-		RELEASE_TO_NIL(accessory);
 	}
 }
 
@@ -326,31 +357,16 @@
 	ENSURE_UI_THREAD(registerDevice,args);
 	ENSURE_SINGLE_ARG(args,NSString);
 	
-	protocol = [args retain];
-	[[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
-	
-	NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-	[center addObserver:self selector:@selector(deviceConnected:) name:EAAccessoryDidConnectNotification object:nil];
-	[center addObserver:self selector:@selector(deviceDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
-	//[center addObserver:self selector:@selector(deviceConnected:) name:kTiResumeNotification object:nil];
-	
-	[self openSessionForProtocol:protocol];
-	
-	//NSLog(@"OPEN SESSION = %@, %@",session,accessory);
-	
-	if (session!=nil && accessory!=nil)
-	{
-		NSDictionary *event = [self accessoryToDictionary:accessory];
-		[self fireEvent:@"connected" withObject:event];
-	}
-}
+	// Release protocol in case app is calling this method multiple times
+	RELEASE_TO_NIL(protocol);
+	protocol = [args copy];
 
--(void)resumeConnection:(id)args
-{	
-	[self closeSession];
-	//NSLog(@" %@",protocol);
-	[self openSessionForProtocol:protocol];
-	
+	// Find the accessory with the specified protocol and open the session
+	// if already present when the application started
+	EAAccessory *acc = [self accessoryForProtocol:protocol];
+	if (acc) {
+		[self openSessionForProtocol:protocol withAccessory:acc];
+	}
 }
 
 @end

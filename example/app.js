@@ -33,7 +33,6 @@ window.add(status_lbl);
 // TODO: write your module tests here
 var magtek = require('ti.magtek');
 //alert("module is => "+magtek);
- magtek.registerDevice('com.appcelerator.magtek');
 
 magtek.addEventListener('connected', function(e) {
    status_lbl.text = 'Status: Connected';
@@ -58,10 +57,9 @@ magtek.addEventListener('swipeError',function(e){
 	exp_lbl.text = 'Exp: ';
 });
 
-Titanium.App.addEventListener('resume',function(e)
-{
-	alert('RESUMED');
-	magtek.resumeConnection();
-});
+// Set the protocol for your device. For example, 'com.yourcompany.magtek'
+magtek.registerDevice('<YOUR PROTOCOL HERE>');
 
 window.open();
+
+

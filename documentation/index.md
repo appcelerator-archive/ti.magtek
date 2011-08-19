@@ -9,6 +9,16 @@ The Ti.Magtek module allows for
 To access this module from JavaScript, you would do the following:
 
 	Titanium.Magtek = Ti.Magtek = require("ti.magtek");
+ 
+## Module functions
+
+### Ti.Magtek.registerDevice(protocol)
+
+This function registers the protocol identifier for the MagTek device.
+
+#### Arguments
+
+protocol[string]: The unique protocol identifier for the MagTek device (e.g. 'com.yourcompany.magtek')
 
 ## Events 
 
@@ -48,10 +58,6 @@ data[object]: A blob representing the data on the magstripe of the card.
 ### swipeError
 
 Fired when a card error is detected during the swipe. This event is triggered when errors are detected composing the data for the swipe event. You will need to analyze the full data blob for all possible errors.   
- 
-## Methods
-### resumeConnection()
-call this in the applications resume event to reconnect the reader when the application goes into the background. 
 
 ## Usage
 
@@ -60,6 +66,7 @@ See example.
 ## Author
 
 Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
+Jeff English <jenglish@appcelerator.com>, Appcelerator, Inc.
 
 ## License
 

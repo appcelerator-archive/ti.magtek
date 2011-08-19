@@ -12,13 +12,17 @@
 
 @interface TiMagtekModule : TiModule <NSStreamDelegate>
 {
-	NSMutableString *fullbuffer;
 @private
-	EASession *session;
+	NSMutableString *fullbuffer;
 	NSString *protocol;
-	EAAccessory *accessory;
+	EASession *session;
 }
 
+-(void)turnConnectionNotificationsOn;
+-(void)turnConnectionNotificationsOff;
+-(BOOL)openSessionForProtocol:(NSString *)protocolString withAccessory:(EAAccessory*)acc;
+-(void)closeSession;
 -(void)parseCardData;
+-(NSMutableDictionary*)accessoryToDictionary:(EAAccessory*)accessory_;
 
 @end
