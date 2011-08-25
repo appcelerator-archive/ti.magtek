@@ -65,8 +65,11 @@ See example.
 
 ## Author
 
-Jeff Haynie <jhaynie@appcelerator.com>, Appcelerator Inc.
-Jeff English <jenglish@appcelerator.com>, Appcelerator, Inc.
+Jeff Haynie & Jeff English
+
+## Feedback and Support
+
+Please direct all questions, feedback, and concerns to [info@appcelerator.com](mailto:info@appcelerator.com?subject=iOS%20Magtek%20Module).
 
 ## License
 
