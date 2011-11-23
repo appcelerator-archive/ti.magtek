@@ -1,9 +1,3 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
-
-
 // open a single window
 var window = Ti.UI.createWindow({
   backgroundColor:'white'
@@ -30,27 +24,25 @@ info_vw.add(exp_lbl);
 var status_lbl = Ti.UI.createLabel({text:"Status: "});
 window.add(status_lbl);
 
-// TODO: write your module tests here
-var magtek = require('ti.magtek');
-//alert("module is => "+magtek);
+var Magtek = require('ti.magtek');
 
-magtek.addEventListener('connected', function(e) {
+Magtek.addEventListener('connected', function(e) {
    status_lbl.text = 'Status: Connected';
 });
-magtek.addEventListener('disconnected', function(e) {
+Magtek.addEventListener('disconnected', function(e) {
 	name_lbl.text = 'Name: ';
 	card_lbl.text = '#: ';
 	exp_lbl.text = 'Exp: ';
 	status_lbl.text = 'Status: Disconnected';
 });
-magtek.addEventListener('swipe', function(e) {
+Magtek.addEventListener('swipe', function(e) {
 	name_lbl.text = 'Name: ' + e.name;
 	card_lbl.text = '#: ' + e.cardnumber;
 	exp_lbl.text = 'Exp: ' + e.expiration;
 	status_lbl.text = "Status: GOOD SWIPE";
 });
 
-magtek.addEventListener('swipeError',function(e){
+Magtek.addEventListener('swipeError',function(e){
 	status_lbl.text = "Status: ERROR";
 	name_lbl.text = 'Name: ';
 	card_lbl.text = '#: ';
@@ -58,7 +50,7 @@ magtek.addEventListener('swipeError',function(e){
 });
 
 // Set the protocol for your device. For example, 'com.yourcompany.magtek'
-magtek.registerDevice('<YOUR PROTOCOL HERE>');
+Magtek.registerDevice('<YOUR PROTOCOL HERE>');
 
 window.open();
 

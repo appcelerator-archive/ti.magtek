@@ -8,7 +8,7 @@ The Ti.Magtek module allows for
 
 To access this module from JavaScript, you would do the following:
 
-	Titanium.Magtek = Ti.Magtek = require("ti.magtek");
+	var Magtek = require('ti.magtek');
  
 ## Module functions
 
