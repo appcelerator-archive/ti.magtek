@@ -9,6 +9,30 @@ The Ti.Magtek module allows for
 View the [Using Titanium Modules](https://wiki.appcelerator.org/display/tis/Using+Titanium+Modules) document for instructions on getting
 started with using this module in your application.
 
+## Using the MagTek module with iOS5 devices
+
+A change in the handling of external accessories with iOS beginning with version 5 requires that the supported external protocols be defined in the 'info.plist' file for the application. In order for your application to access the MagTek scanner on iOS5 devices, you need to follow these steps to update your info.plist file:
+
+### Step 1: Generate info.plist file
+
+* Build the application once
+* Navigate to the 'build/iphone' folder and locate the 'info.plist' file
+* Copy the 'info.plist' file to the application's project root folder
+
+### Step 2: Edit the info.plist file
+
+* Open the copied info.plist file by double-clicking on the file in Finder
+* Right-click in the list of entries and select 'Add Row'
+* Select the entry titled 'Supported external accessory protocols' -- the entry should be added to the info.plist as an 'Array' type
+* Expand the 'Supported external accessory protocols' entry and select the value for 'Item 0' so that it can be edited
+* Enter the unique protocol identifier for the MagTek device (e.g. 'com.yourcompany.magtek')
+* Save and close the file
+
+### Step 3: Rebuild your application
+
+* Clean the application project
+* Build the application -- the info.plist file will be copied into the 'build/iphone' folder for you each time that the application is built
+
 ## Accessing the Ti.Magtek Module
 
 To access this module from JavaScript, you would do the following:
