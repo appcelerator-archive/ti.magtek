@@ -6,7 +6,7 @@ The Ti.Magtek module allows for
 
 ## Getting Started
 
-View the [Using Titanium Modules](https://wiki.appcelerator.org/display/tis/Using+Titanium+Modules) document for instructions on getting
+View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/2.0/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using this module in your application.
 
 ## Using the MagTek module with iOS5 devices
