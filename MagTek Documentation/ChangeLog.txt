@@ -1,0 +1,40 @@
+**********************************************************************************
+99510108 WEB iOS  SOFT DEV KIT - SDK
+**********************************************************************************
+V104.02 Date:05.01.2012
+
+   * Audio Reader
+   	* Fixed Bug with reading cards with short track data
+   	* Added support for upcoming firmware changes
+  	* Fixed Issue Reading Max ISO Track1,2 and 3 Cards
+   	* Separated the documents for Audio Reader and iDynamo
+
+   * iDynamo Reader
+   	* Separated the documents for Audio Reader and iDynamo
+    
+
+**********************************************************************************
+**********************************************************************************
+V104.04 Date:06.19.2012
+    
+   * Audio Reader 
+   	* Added support for Mod10 Check DIgit
+
+   * iDynamo Reader
+   	* NA
+**********************************************************************************
+**********************************************************************************
+V105.01 Date:07.24.2012
+    
+   * Audio Reader 
+	* Updated SDK to Support New Reader Firmware
+   	* Updated SDK to retrieve Masking From Reader If Available
+   	* Updated SDK to retrieve SessionID From Reader If Available
+   	* Updated SDK to retrieve MagnePrint From Reader If Available
+   	* Updated SDK to retrieve MagnePrint Status From Reader If Available
+
+   * iDynamo Reader
+   	* NA
+**********************************************************************************
+**********************************************************************************
+    

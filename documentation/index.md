@@ -2,14 +2,14 @@
 
 ## Description
 
-The Ti.Magtek module allows for
+The Ti.Magtek module allows for developing applications for the iDynamo and audio jack readers under iOS. The software must be used on an iOS device and are not supported in a simulated environment.
 
 ## Getting Started
 
 View the [Using Titanium Modules](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_Titanium_Modules) document for instructions on getting
 started with using this module in your application.
 
-## Using the MagTek module with iOS5 devices
+## Using the MagTek module with iOS5+ devices
 
 A change in the handling of external accessories with iOS beginning with version 5 requires that the supported external protocols be defined in the 'Info.plist' file for the application. In order for your application to access the MagTek scanner on iOS5 devices, you need to follow these steps to update your Info.plist file:
 
@@ -33,68 +33,128 @@ A change in the handling of external accessories with iOS beginning with version
 * Clean the application project
 * Build the application -- the Info.plist file will be copied into the 'build/iphone' folder for you each time that the application is built
 
-## Accessing the Ti.Magtek Module
+## Accessing the Module
 
-To access this module from JavaScript, you would do the following:
+Use `require` to access this module from JavaScript:
 
 	var Magtek = require('ti.magtek');
+	
+The Magtek variable is a reference to the Module object.
  
-## Module functions
+## Methods
 
-### Ti.Magtek.registerDevice(protocol)
+### void Magtek.registerDevice(options)
 
-This function registers the protocol identifier for the MagTek device.
+This function registers the protocol identifier for the MagTek device and optionally, sets the deviceType.
 
 #### Arguments
 
-protocol[string]: The unique protocol identifier for the MagTek device (e.g. 'com.yourcompany.magtek')
+* options[object]	
+	* __protocol__ [string] (required): The unique protocol identifier for the MagTek device (e.g. 'com.yourcompany.magtek')
+	* __deviceType__ [int] (optional): can be set to
+		* DEVICE_TYPE_IDYNAMO (default if deviceType not specified)
+		* DEVICE_TYPE_AUDIO_READER
+		
+	
+#### Example
+	// Set the protocol for your device. For example, 'com.yourcompany.magtek'
+	Magtek.registerDevice({
+		protocol: '<<--- YOUR DEVICE PROTOCOL --->>',
+		deviceType: Magtek.DEVICE_TYPE_IDYNAMO
+	});
+
+## Properties
+### Magtek.DEVICE_TYPE_IDYNAMO [int] (read-only)
+
+Used to set the deviceType to iDynamo when calling registerDevice()
+
+### Magtek.DEVICE_TYPE_AUDIO_READER [int] (read-only)
+	
+Used to set the deviceType to audio jack reader when calling registerDevice()
 
 ## Events 
 
-### connected
+### "connected"
 
 Fired when a scanning device is connected.  Event dictionary is:
 
-connectionId[int]: The connection identifier  
-name[string]: The name of the accessory  
-manufacturer[string]: The manufacturer of the accessory  
-modelNumber[string]: The model number for the accessory  
-serialNumber[string]: The serial number for the accessory  
-hardwareRevision[string]: The hardware revision of the accessory  
-firmwareRevision[string]: The firmware revision of the accessory
+* deviceName[string]: The name of the accessory  
 
-### disconnected
+#### Example
+	Magtek.addEventListener('connected', function(e) {
+	   Ti.API.info('Connected: '+JSON.stringify(e));
+	});
+
+### "disconnected"
 
 Fired when a scanning device is disconnected.  Event dictionary is:
 
-connectionId[int]: The connection identifier  
-name[string]: The name of the accessory  
-manufacturer[string]: The manufacturer of the accessory  
-modelNumber[string]: The model number for the accessory  
-serialNumber[string]: The serial number for the accessory  
-hardwareRevision[string]: The hardware revision of the accessory  
-firmwareRevision[string]: The firmware revision of the accessory
+* deviceName[string]: The name of the accessory  
 
-### swipe
+#### Example
+	Magtek.addEventListener('disconnected', function(e) {
+	   Ti.API.info('Disconnected: '+JSON.stringify(e));
+	});
 
-Fired when a card is swiped through the scanning device.  Event dictionary is:
+### "swipe"
 
-name[string]: The name of the card owner  
-cardnumber[string]: The (masked) card number  
-expiration[string]: The expiration date, in xx/xx format.  
-data[object]: A blob representing the data on the magstripe of the card.  
+Fired when a card is swiped through the scanning device. Properties in the event dictionary may contain an empty string if the value is not available. Event dictionary is:
 
-### swipeError
+* __maskedTracks__ [string]: Masked data, only supported for iDynamo, it will return a empty string in audio reader
+* __track1__ [string]: Encrypted Track1 if any
+* __track2__ [string]: Encrypted Track2 if any
+* __track3__ [string]: Encrypted Track3 if any
+* __track1Masked__ [string]: Masked Track1 if any
+* __track2Masked__ [string]: Masked Track2 if any
+* __track3Masked__ [string]: Masked Track3 if any
+* __magnePrint__ [string]: Encrypted MagnePrint, only supported for iDynamo, it will return a empty string in audio reader
+* __magnePrintStatus__ [string]: MagnePrint Status, only supported for iDynamo, it will return a empty string in audio reader
+* __deviceSerial__ [string]: Device serial number
+* __sessionID__ [string]: Session ID, only supported for iDynamo, it will return a empty string in audio reader
+* __KSN__ [string]: Key serial number
+* __magTekDeviceSerial__ [string]: Device Serial Number created by MagTek
+* __deviceName__ [string]: Device model name
+* __deviceCaps__ [string]: Device capabilities
+* __TLVVersion__ [string]: TLV Version of firmware
+* __devicePartNumber__ [string]: Device part number
+* __capMSR__ [string]: MSR Capability
+* __capTracks__ [string]: Tracks Capability
+* __capMagStripeEncryption__ [string]: MagStripe Encryption Capability
+* __cardPANLength__ [number]: Length of the PAN
+* __responseData__ [string]: The whole Response from the reader
+* __cardName__ [string]: The Name in the Card
+* __cardIIN__ [string]: The IIN in the Card
+* __cardLast4__ [string]: The last 4 of the PAN
+* __cardExpDate__ [string]: The Expiration Date
+* __cardServiceCode__ [string]: The Service Code
+* __cardStatus__ [string]: The Card Status
+* __trackDecodeStatus__ [string]: The Track Decode Status
+* __responseType__ [string]: The Response Type
+* __operationStatus__ [string]: The Operation Status
+* __batteryLevel__ [string]: The Device Battery Level
+* __firmware__ [string]: Firmware version number
 
-Fired when a card error is detected during the swipe. This event is triggered when errors are detected composing the data for the swipe event. You will need to analyze the full data blob for all possible errors.   
+#### Example
+	Magtek.addEventListener('swipe', function(e) {
+		Ti.API.info('Swipe: '+JSON.stringify(e));
+	});
+
+### "swipeError"
+
+Fired when a card error is detected during the swipe. This event is triggered when errors are detected composing the data for the swipe event. Typically caused by a read error on one of the tracks, and indicates that the card needs to be swiped again.
+
+#### Example
+	Magtek.addEventListener('swipeError',function(e){
+		Ti.API.info('Swipe Error: Please re-swipe the card');
+	});
 
 ## Usage
 
-See example.
+See the example application in the `example` folder of the module.
 
 ## Author
 
-Jeff Haynie & Jeff English
+Jeff Haynie, Jeff English, and Jon Alter
 
 ## Module History
 
@@ -106,5 +166,4 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 
-Copyright(c) 2010-2011 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
-
+Copyright(c) 2010-2012 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.

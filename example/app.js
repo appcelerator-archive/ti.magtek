@@ -1,57 +1,40 @@
-// open a single window
-var window = Ti.UI.createWindow({
-  backgroundColor:'white'
-});
+var window = Ti.UI.createWindow({backgroundColor:'#FFF'});
+window.open();
 
-var titleBar = Ti.UI.createView({width:300,height:50,backgroundColor:'#000',top:20});
-window.add(titleBar);
+var scrollView = Ti.UI.createScrollView({layout: "vertical"});
+var statusBar = Ti.UI.createView({width:'90%',height:40,backgroundColor:'#F00',top:20});
+var statusLabel = Ti.UI.createLabel({text:'Card Information:',color:'#000',height:30,left:10});
+var responseLabel = Ti.UI.createLabel({text:'Response:', top:10, width:'90%'});
 
-var title_lbl = Ti.UI.createLabel({text:'Card Information:',color:'#FFF',height:40,left:10});
-titleBar.add(title_lbl);
-
-var info_vw = Ti.UI.createView({width:300,height:300,top:72,borderRadius:2});
-window.add(info_vw);
-
-var name_lbl = Ti.UI.createLabel({text:'Name: ',height:35,top:5});
-info_vw.add(name_lbl);
-
-var card_lbl = Ti.UI.createLabel({text:'#: ',height:35,top:45});
-info_vw.add(card_lbl);
-
-var exp_lbl = Ti.UI.createLabel({text:'Exp: ',height:35,top:85});
-info_vw.add(exp_lbl);
-
-var status_lbl = Ti.UI.createLabel({text:"Status: "});
-window.add(status_lbl);
+statusBar.add(statusLabel);
+scrollView.add(statusBar);
+scrollView.add(responseLabel);
+window.add(scrollView);
 
 var Magtek = require('ti.magtek');
 
 Magtek.addEventListener('connected', function(e) {
-   status_lbl.text = 'Status: Connected';
+   statusLabel.text = 'Status: Connected';
+   statusBar.backgroundColor = '#0F0';
+   Ti.API.info('Connected: '+JSON.stringify(e));
 });
 Magtek.addEventListener('disconnected', function(e) {
-	name_lbl.text = 'Name: ';
-	card_lbl.text = '#: ';
-	exp_lbl.text = 'Exp: ';
-	status_lbl.text = 'Status: Disconnected';
+	statusLabel.text = 'Status: Disconnected';
+	statusBar.backgroundColor = '#F00';
+   Ti.API.info('Disconnected: '+JSON.stringify(e));
 });
 Magtek.addEventListener('swipe', function(e) {
-	name_lbl.text = 'Name: ' + e.name;
-	card_lbl.text = '#: ' + e.cardnumber;
-	exp_lbl.text = 'Exp: ' + e.expiration;
-	status_lbl.text = "Status: GOOD SWIPE";
+	responseLabel.text = 'Response: '+JSON.stringify(e);
+	Ti.API.info('Swipe: '+JSON.stringify(e));
 });
 
 Magtek.addEventListener('swipeError',function(e){
-	status_lbl.text = "Status: ERROR";
-	name_lbl.text = 'Name: ';
-	card_lbl.text = '#: ';
-	exp_lbl.text = 'Exp: ';
+	responseLabel.text = "Response: ERROR";
+	Ti.API.info('Swipe Error: Please re-swipe the card');
 });
 
 // Set the protocol for your device. For example, 'com.yourcompany.magtek'
-Magtek.registerDevice('<YOUR PROTOCOL HERE>');
-
-window.open();
-
-
+Magtek.registerDevice({
+	protocol: '<YOUR PROTOCOL HERE>',
+	deviceType: Magtek.DEVICE_TYPE_IDYNAMO
+});
