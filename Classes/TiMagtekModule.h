@@ -10,20 +10,15 @@
 #import <ExternalAccessory/ExternalAccessory.h>
 
 
-@interface TiMagtekModule : TiModule <NSStreamDelegate>
+@interface TiMagtekModule : TiModule
 {
 @private
     MTSCRA *mtSCRALib;
+    NSString *protocol;
+    int deviceType;
+    BOOL openDeviceOnConnect;
+    float openDelayAfterClose;
+    float openDelayAfterRemoveObserver;
 }
-
-@property (readwrite, retain) MTSCRA *mtSCRALib;
-
--(void)turnDeviceNotificationsOn;
--(void)turnDeviceNotificationsOff;
--(NSMutableDictionary*)accessoryToDictionary;
--(void)trackDataReady:(NSNotification *)notification;
--(void)devConnStatusChange;
--(void)onDataEvent:(id)status;
--(void)displayData;
 
 @end

@@ -63,7 +63,7 @@ This function registers the protocol identifier for the MagTek device and option
 		deviceType: Magtek.DEVICE_TYPE_IDYNAMO
 	});
 
-## Properties
+## Constants
 ### Magtek.DEVICE_TYPE_IDYNAMO [int] (read-only)
 
 Used to set the deviceType to iDynamo when calling registerDevice()

@@ -1,10 +1,30 @@
-var window = Ti.UI.createWindow({backgroundColor:'#FFF'});
+var window = Ti.UI.createWindow({
+	backgroundColor:'#FFF'
+});
 window.open();
 
-var scrollView = Ti.UI.createScrollView({layout:"vertical", contentHeight:Ti.UI.SIZE||'auto'});
-var statusBar = Ti.UI.createView({width:'90%', height:40, backgroundColor:'#F00', top:20});
-var statusLabel = Ti.UI.createLabel({text:'Card Information:', color:'#000', height:30, left:10});
-var responseLabel = Ti.UI.createLabel({text:'Response:', top:10, width:'90%', height:Ti.UI.SIZE||'auto'});
+var scrollView = Ti.UI.createScrollView({
+	layout:"vertical",
+	contentHeight:Ti.UI.SIZE||'auto'
+});
+var statusBar = Ti.UI.createView({
+	backgroundColor:'#F00',
+	top:20,
+	width:'90%',
+	height:40
+});
+var statusLabel = Ti.UI.createLabel({
+	text:'Status:',
+	color:'#000',
+	height:30,
+	left:10
+});
+var responseLabel = Ti.UI.createLabel({
+	text:'Response:',
+	top:10,
+	width:'90%',
+	height:Ti.UI.SIZE||'auto'
+});
 
 statusBar.add(statusLabel);
 scrollView.add(statusBar);

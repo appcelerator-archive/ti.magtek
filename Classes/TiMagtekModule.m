@@ -14,6 +14,14 @@
 // is 'com.appcelerator.magtek'. Use that value in the sample app when calling registerDevice.
 // *******************************************************************************************
 
+// *******************************************************************************************
+// NOTE: Due to some problems with the MagTek library, it is necessary to delay calling some
+// methods for some seconds to avoid race conditions. The amount of delay is controlled by
+// variables "openDelayAfterClose" and "openDelayAfterRemoveObserver" which are initialized in
+// init where there is also an exaplanation of what they control. These variables are exposed
+// as properties of the module and can be set in the case that the default values are not working.
+// *******************************************************************************************
+
 #import "TiMagtekModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
@@ -21,8 +29,6 @@
 #import "TiBlob.h"
 
 @implementation TiMagtekModule
-
-@synthesize mtSCRALib;
 
 #pragma mark Internal
 
@@ -57,7 +63,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 
 -(id)init
 {	
-    self.mtSCRALib = [[MTSCRA alloc] init];
+    mtSCRALib = [[MTSCRA alloc] init];
     
     // TRANS_STATUS_START should be used with caution. CPU intensive
     // tasks done after this events and before TRANS_STATUS_OK
@@ -66,6 +72,21 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
     
 	// Register for device notifications
 	[self turnDeviceNotificationsOn];
+    
+    // The time (in seconds) till openDevice is called after deviceClosed is called.
+    // Calling open immediately after close will create a race condition causing
+    // the open to not function correctly
+    // 
+    // This happens when registerDevice is called more than 1x and with different parameters
+    // If cards are not being read correctly after this case, try increasing the delay
+    openDelayAfterClose = 2.0;
+    
+    // The time (in seconds) till openDevice is called after the device connection observer
+    // is triggered and removed
+    // 
+    // This happens when registerDevice is called before a device is connected. 
+    // If cards are not being read correctly after this case, try increasing the delay
+    openDelayAfterRemoveObserver = 1.0;
     
 	return [super init];
 }
@@ -82,7 +103,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 	
 	[self turnDeviceNotificationsOff];	
     
-	RELEASE_TO_NIL(self.mtSCRALib);
+	RELEASE_TO_NIL(mtSCRALib);
 	
 	[super _destroy];
 }
@@ -114,33 +135,12 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center removeObserver:self name:@"trackDataReadyNotification" object:nil];
     [center removeObserver:self name:@"devConnectionNotification" object:nil];
+    if (openDeviceOnConnect) {
+        [center removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
+    }
 }
 
 #pragma mark Notifications
-
--(void)deviceConnected:(NSNotification*)note
-{
-	EAAccessory *acc = [[note userInfo] objectForKey:EAAccessoryKey];
-    
-    NSDictionary *event = [self accessoryToDictionary];
-    [self fireEvent:@"connected" withObject:event];
-}
-
--(void)deviceDisconnected:(NSNotification*)note
-{
-	EAAccessory *acc = [[note userInfo] objectForKey:EAAccessoryKey];
-    
-    NSDictionary *event = [self accessoryToDictionary];
-    [self fireEvent:@"disconnected" withObject:event];
-}
-
--(NSMutableDictionary*)accessoryToDictionary
-{
-	NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    [dict setValue:[mtSCRALib getDeviceName] forKey:@"deviceName"];
-	
-	return dict;	
-}
 
 -(void)devConnStatusChange
 {    
@@ -158,10 +158,10 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
     }
 }
 
-- (void)trackDataReady:(NSNotification *)notification
+-(void)trackDataReady:(NSNotification *)notification
 {
     NSNumber *status = [[notification userInfo] valueForKey:@"status"];
-    [self performSelectorOnMainThread:@selector(onDataEvent:) withObject:status waitUntilDone:NO];
+    [self onDataEvent:status];
 }
 
 -(void)onDataEvent:(id)status
@@ -169,7 +169,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 	switch ([status intValue]) {
         case TRANS_STATUS_OK:
             
-            [self displayData];
+            [self fireSwipeEvent];
             
             break;
         case TRANS_STATUS_START:
@@ -181,18 +181,33 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
             break;   
         case TRANS_STATUS_ERROR:
             
-            if (mtSCRALib !=NULL) {
-                if ([self _hasListeners:@"swipeError"]) {
-                    [self fireEvent:@"swipeError"];
-                }       
+            if ([self _hasListeners:@"swipeError"]) {
+                [self fireEvent:@"swipeError"];
             }
+            [mtSCRALib clearBuffers];
             
             break;
         default:
             break;
     }
-    
-    
+}
+
+-(void)fireSwipeEvent
+{
+    if (mtSCRALib !=NULL) {
+        if (![self trackReadSuccessful]) {
+            if ([self _hasListeners:@"swipeError"]) {
+                [self fireEvent:@"swipeError"];
+            }
+        } else {
+            if ([self _hasListeners:@"swipe"]) {
+                NSDictionary *event = [self swipeToDictionary];
+                [self fireEvent:@"swipe" withObject:event];
+            }
+        }
+        
+        [mtSCRALib clearBuffers];
+    }
 }
 
 -(BOOL)trackReadSuccessful
@@ -205,64 +220,134 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
     // 02 = Track is Blank 
     NSString *trackDecodeStatus = [mtSCRALib getTrackDecodeStatus];
     NSRange range = [trackDecodeStatus rangeOfString:@"01"];
-    return (range.location==NSNotFound);
+    return (range.location == NSNotFound);
 }
 
--(void)displayData
+-(NSDictionary*)accessoryToDictionary
 {
-    if (mtSCRALib !=NULL) {
-        if (![self trackReadSuccessful]) {
-            if ([self _hasListeners:@"swipeError"]) {
-                [self fireEvent:@"swipeError"];
-            }
-            return;
-        }
-        
-        if ([self _hasListeners:@"swipe"]) {
-            NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:
-                                   [mtSCRALib getMaskedTracks],            @"maskedTracks", 
-                                   [mtSCRALib getTrack1],                  @"track1",
-                                   [mtSCRALib getTrack2],                  @"track2",
-                                   [mtSCRALib getTrack3],                  @"track3",
-                                   [mtSCRALib getTrack1Masked],            @"track1Masked",
-                                   [mtSCRALib getTrack2Masked],            @"track2Masked",
-                                   [mtSCRALib getTrack3Masked],            @"track3Masked",
-                                   [mtSCRALib getMagnePrint],              @"magnePrint",
-                                   [mtSCRALib getMagnePrintStatus],        @"magnePrintStatus",
-                                   [mtSCRALib getDeviceSerial],            @"deviceSerial",
-                                   [mtSCRALib getSessionID],               @"sessionID",
-                                   [mtSCRALib getKSN],                     @"KSN",
-                                   [mtSCRALib getMagTekDeviceSerial],      @"magTekDeviceSerial",
-                                   [mtSCRALib getDeviceName],              @"deviceName",
-                                   [mtSCRALib getDeviceCaps],              @"deviceCaps",
-                                   [mtSCRALib getTLVVersion],              @"TLVVersion",
-                                   [mtSCRALib getDevicePartNumber],        @"devicePartNumber",
-                                   [mtSCRALib getCapMSR],                  @"capMSR",
-                                   [mtSCRALib getCapTracks],               @"capTracks",
-                                   [mtSCRALib getCapMagStripeEncryption],  @"capMagStripeEncryption",
-                                   NUMINT([mtSCRALib getCardPANLength]),   @"cardPANLength",
-                                   [mtSCRALib getResponseData],            @"responseData",
-                                   [mtSCRALib getCardName],                @"cardName",
-                                   [mtSCRALib getCardIIN],                 @"cardIIN",
-                                   [mtSCRALib getCardLast4],               @"cardLast4",
-                                   [mtSCRALib getCardExpDate],             @"cardExpDate",
-                                   [mtSCRALib getCardServiceCode],         @"cardServiceCode",
-                                   [mtSCRALib getCardStatus],              @"cardStatus",
-                                   [mtSCRALib getTrackDecodeStatus],       @"trackDecodeStatus",
-                                   [mtSCRALib getResponseType],            @"responseType", 
-                                   [mtSCRALib getOperationStatus],         @"operationStatus",
-                                   NUMINT([mtSCRALib getBatteryLevel]),    @"batteryLevel",
-                                   [mtSCRALib getFirmware],                @"firmware",
-                                   nil
-                                   ];
-            [self fireEvent:@"swipe" withObject:event];
-        }
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [mtSCRALib getDeviceName], @"deviceName",
+                          nil
+                          ];
+	
+	return dict;	
+}
 
-        [mtSCRALib clearBuffers];
+-(NSDictionary*)swipeToDictionary
+{
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [mtSCRALib getMaskedTracks],            @"maskedTracks", 
+                          [mtSCRALib getTrack1],                  @"track1",
+                          [mtSCRALib getTrack2],                  @"track2",
+                          [mtSCRALib getTrack3],                  @"track3",
+                          [mtSCRALib getTrack1Masked],            @"track1Masked",
+                          [mtSCRALib getTrack2Masked],            @"track2Masked",
+                          [mtSCRALib getTrack3Masked],            @"track3Masked",
+                          [mtSCRALib getMagnePrint],              @"magnePrint",
+                          [mtSCRALib getMagnePrintStatus],        @"magnePrintStatus",
+                          [mtSCRALib getDeviceSerial],            @"deviceSerial",
+                          [mtSCRALib getSessionID],               @"sessionID",
+                          [mtSCRALib getKSN],                     @"KSN",
+                          [mtSCRALib getMagTekDeviceSerial],      @"magTekDeviceSerial",
+                          [mtSCRALib getDeviceName],              @"deviceName",
+                          [mtSCRALib getDeviceCaps],              @"deviceCaps",
+                          [mtSCRALib getTLVVersion],              @"TLVVersion",
+                          [mtSCRALib getDevicePartNumber],        @"devicePartNumber",
+                          [mtSCRALib getCapMSR],                  @"capMSR",
+                          [mtSCRALib getCapTracks],               @"capTracks",
+                          [mtSCRALib getCapMagStripeEncryption],  @"capMagStripeEncryption",
+                          NUMINT([mtSCRALib getCardPANLength]),   @"cardPANLength",
+                          [mtSCRALib getResponseData],            @"responseData",
+                          [mtSCRALib getCardName],                @"cardName",
+                          [mtSCRALib getCardIIN],                 @"cardIIN",
+                          [mtSCRALib getCardLast4],               @"cardLast4",
+                          [mtSCRALib getCardExpDate],             @"cardExpDate",
+                          [mtSCRALib getCardServiceCode],         @"cardServiceCode",
+                          [mtSCRALib getCardStatus],              @"cardStatus",
+                          [mtSCRALib getTrackDecodeStatus],       @"trackDecodeStatus",
+                          [mtSCRALib getResponseType],            @"responseType", 
+                          [mtSCRALib getOperationStatus],         @"operationStatus",
+                          NUMINT([mtSCRALib getBatteryLevel]),    @"batteryLevel",
+                          [mtSCRALib getFirmware],                @"firmware",
+                          nil
+                          ];
+	
+	return dict;	
+}
+
+-(void)openDeviceWithData
+{
+    if ((deviceType != MAGTEKAUDIOREADER) && (deviceType !=  MAGTEKIDYNAMO)) {
+        NSLog(@"[ERROR] MagtekModule invalid 'deviceType' passed to registerDevice(), defaulting to iDynamo");
+        deviceType = MAGTEKIDYNAMO;
+    }
+    
+    if (!protocol && (deviceType == MAGTEKIDYNAMO)) {
+        NSLog(@"[ERROR] MagtekModule 'protocol' is required when calling registerDevice()");
+    }
+    
+    [mtSCRALib setDeviceType:deviceType];
+    
+    // Protocol does not need to be set if deviceType is MAGTEKAUDIOREADER
+    if (deviceType == MAGTEKIDYNAMO) {
+        [mtSCRALib setDeviceProtocolString:(protocol)]; 
+    }
+    
+    if (![mtSCRALib isDeviceOpened]) {
+        [self openDevice];
     }
 }
 
+-(void)openDevice
+{
+    EAAccessory *acc = [self accessoryForProtocol:protocol];
+    
+    // If [mtSCRALib openDevice] is called before a device is connected "trackDataReadyNotification" 
+    // events will not come through until the device is re-plugged in
+    // Solution: wait for device to be plugged in before calling openDevice
+    
+    // Checking if device is connected
+	if (acc) {
+        [mtSCRALib openDevice];
+        [self devConnStatusChange];
+        
+        // openDeviceCount is true if an observer is already set for EAAccessoryDidConnectNotification
+        // We do not want to add more than one observer
+	} else if (!openDeviceOnConnect) {
+        
+        openDeviceOnConnect = YES;
+        // Listen for device connection
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceConnected:) name:EAAccessoryDidConnectNotification object:nil];
+    }
+}
 
+-(void)deviceConnected:(NSNotification*)note
+{
+	EAAccessory *acc = [[note userInfo] objectForKey:EAAccessoryKey];
+	
+	if ([[acc protocolStrings] containsObject:protocol] && openDeviceOnConnect) {
+        openDeviceOnConnect = NO;
+        // Remove device connection observer (no need to call it again and it blocks the trackDataReadyNotification)
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
+        
+        // If openDevice is called directly here (without a delay) then "trackDataReadyNotification"
+        // events do not alwasy come through, it works sporatically.
+        [self performSelector:@selector(openDevice) withObject:nil afterDelay:openDelayAfterRemoveObserver];
+	}
+}
+
+-(EAAccessory*)accessoryForProtocol:(NSString*)protocolString
+{
+    NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager]	connectedAccessories];
+	
+    for (EAAccessory *obj in accessories) {
+        if ([[obj protocolStrings] containsObject:protocolString]) {
+			return (obj);
+        }
+    }	
+	
+	return nil;
+}
 
 #pragma mark Public APIs
 
@@ -270,28 +355,40 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 {
 	ENSURE_UI_THREAD(registerDevice,args);
 	ENSURE_SINGLE_ARG(args,NSDictionary);
-	
-    NSString *protocol = [TiUtils stringValue:@"protocol" properties:args def:nil];
-    // default to iDynamo if no deviceType set
-    int deviceType = [TiUtils intValue:@"deviceType" properties:args def:MAGTEKIDYNAMO];
+
+    NSString *newProtocol = [TiUtils stringValue:@"protocol" properties:args def:nil];
+    // Default to iDynamo if no deviceType set
+    int newDeviceType = [TiUtils intValue:@"deviceType" properties:args def:MAGTEKIDYNAMO];
     
-    if (!protocol) {
-        NSLog(@"[ERROR] MagtekModule 'protocol' is required when calling registerDevice()");
+    // No need to re-open device if being called with the same params
+    if (([newProtocol isEqualToString: protocol]) && (newDeviceType == deviceType)) {
+        return;
     }
     
-    if (deviceType < MAGTEKAUDIOREADER || deviceType >  MAGTEKIDYNAMO) {
-        NSLog(@"[ERROR] MagtekModule invalid 'deviceType' passed to registerDevice(), defaulting to iDynamo");
-        deviceType = MAGTEKIDYNAMO;
-    }
+    // Release protocol in case app is calling this method multiple times
+    RELEASE_TO_NIL(protocol);
     
-    [mtSCRALib setDeviceType:deviceType];
-    [mtSCRALib setDeviceProtocolString:(protocol)]; 
-    
-    if (![mtSCRALib isDeviceOpened]) {
-        [mtSCRALib openDevice];
-    }
-    
-    [self devConnStatusChange];
+    protocol = [newProtocol copy];
+    deviceType = newDeviceType;
+          
+    if ([mtSCRALib isDeviceOpened]) {
+        [mtSCRALib closeDevice];
+        [mtSCRALib clearBuffers];
+        // Delaying because [mtSCRALib openDevice] will fail to connect if called immediately after closeDevice
+        [self performSelector:@selector(openDeviceWithData) withObject:args afterDelay:openDelayAfterClose];
+    } else {
+        [self openDeviceWithData];
+    }   
+}
+
+-(void)setOpenDelayAfterClose:(id)value
+{
+    openDelayAfterClose = [TiUtils floatValue:value];
+}
+
+-(void)setOpenDelayAfterRemoveObserver:(id)value
+{
+    openDelayAfterRemoveObserver = [TiUtils floatValue:value];
 }
 
 @end
