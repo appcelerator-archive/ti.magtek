@@ -27,6 +27,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 #import "TiBlob.h"
+#import <ExternalAccessory/ExternalAccessory.h>
 
 @implementation TiMagtekModule
 
@@ -63,32 +64,34 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 
 -(id)init
 {	
-    mtSCRALib = [[MTSCRA alloc] init];
+    if (self = [super init]) {
+        mtSCRALib = [[MTSCRA alloc] init];
+        
+        // TRANS_STATUS_START should be used with caution. CPU intensive
+        // tasks done after this events and before TRANS_STATUS_OK
+        // may interfere with reader communication
+        [mtSCRALib listenForEvents:(TRANS_EVENT_START|TRANS_EVENT_OK|TRANS_EVENT_ERROR)]; 
+        
+        // Register for device notifications
+        [self turnDeviceNotificationsOn];
+        
+        // The time (in seconds) till openDevice is called after deviceClosed is called.
+        // Calling open immediately after close will create a race condition causing
+        // the open to not function correctly
+        // 
+        // This happens when registerDevice is called more than 1x and with different parameters
+        // If cards are not being read correctly after this case, try increasing the delay
+        openDelayAfterClose = 2.0;
+        
+        // The time (in seconds) till openDevice is called after the device connection observer
+        // is triggered and removed
+        // 
+        // This happens when registerDevice is called before a device is connected. 
+        // If cards are not being read correctly after this case, try increasing the delay
+        openDelayAfterRemoveObserver = 3.0;
+    }
     
-    // TRANS_STATUS_START should be used with caution. CPU intensive
-    // tasks done after this events and before TRANS_STATUS_OK
-    // may interfere with reader communication
-    [mtSCRALib listenForEvents:(TRANS_EVENT_START|TRANS_EVENT_OK|TRANS_EVENT_ERROR)]; 
-    
-	// Register for device notifications
-	[self turnDeviceNotificationsOn];
-    
-    // The time (in seconds) till openDevice is called after deviceClosed is called.
-    // Calling open immediately after close will create a race condition causing
-    // the open to not function correctly
-    // 
-    // This happens when registerDevice is called more than 1x and with different parameters
-    // If cards are not being read correctly after this case, try increasing the delay
-    openDelayAfterClose = 2.0;
-    
-    // The time (in seconds) till openDevice is called after the device connection observer
-    // is triggered and removed
-    // 
-    // This happens when registerDevice is called before a device is connected. 
-    // If cards are not being read correctly after this case, try increasing the delay
-    openDelayAfterRemoveObserver = 1.0;
-    
-	return [super init];
+	return self;
 }
 
 -(void)_destroy
@@ -104,6 +107,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 	[self turnDeviceNotificationsOff];	
     
 	RELEASE_TO_NIL(mtSCRALib);
+	RELEASE_TO_NIL(protocol);
 	
 	[super _destroy];
 }

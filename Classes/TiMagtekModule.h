@@ -7,9 +7,6 @@
 #import "TiModule.h"
 #import "MTSCRA.h"
 
-#import <ExternalAccessory/ExternalAccessory.h>
-
-
 @interface TiMagtekModule : TiModule
 {
 @private
