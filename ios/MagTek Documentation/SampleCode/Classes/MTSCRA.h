@@ -23,10 +23,9 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <AudioUnit/AudioUnit.h>
 #import <ExternalAccessory/ExternalAccessory.h>
+#import "AVFoundation/AVAudioSession.h"
 
-
-
-enum MTSCRATransactionData
+typedef NS_ENUM(NSUInteger, MTSCRATransactionData)
 {
     TLV_OPSTS,
     TLV_CARDSTS,
@@ -65,24 +64,33 @@ enum MTSCRATransactionData
     TLV_CFGCARDLAST4,
     TLV_CFGCARDEXPDATE,
     TLV_CFGCARDSVCCODE,
-    TLV_CFGCARDPANLEN
-    
+    TLV_CFGCARDPANLEN,
+    TLV_MSKTK1,
+    TLV_MSKTK2,
+    TLV_MSKTK3,
+    TLV_HASHCODE,
+    TLV_SESSIONID,
+    TLV_MAGNEPRINT,
+    TLV_MAGNEPRINT_STS
 };
 
 
-enum MTSCRATransactionStatus 
+typedef NS_ENUM(NSUInteger, MTSCRATransactionStatus)
 {
 	TRANS_STATUS_OK,
     TRANS_STATUS_START,
     TRANS_STATUS_ERROR
 };
-enum MTSCRATransactionEvent 
+
+typedef NS_ENUM(NSUInteger, MTSCRATransactionEvent)
 {
 	TRANS_EVENT_OK = 1,
     TRANS_EVENT_ERROR=2,
-    TRANS_EVENT_START = 4
+    TRANS_EVENT_START = 4,
+    
 };
-enum MTSCRACapabilities 
+
+typedef NS_ENUM(NSUInteger, MTSCRACapabilities)
 {
 	CAP_MASKING = 1,
     CAP_ENCRYPTION=2,
@@ -92,7 +100,7 @@ enum MTSCRACapabilities
     CAP_DISCOVERY= 32,
 };
 
-enum MTSCRADeviceType 
+typedef NS_ENUM(NSUInteger, MTSCRADeviceType)
 {
     MAGTEKAUDIOREADER,
     MAGTEKIDYNAMO,
@@ -100,7 +108,7 @@ enum MTSCRADeviceType
     
 };
 
-enum MTSCRACardDataContent
+typedef NS_ENUM(NSUInteger, MTSCRACardDataContent)
 {
     MASKED_TRACKDATA,
     DEVICE_ENCRYPTION_STATUS,
@@ -133,6 +141,7 @@ enum MTSCRACardDataContent
     NSString *encryptedTrack1;
     NSString *encryptedTrack2;
     NSString *encryptedTrack3;
+    NSString *encryptionStatus;
     NSString *maskedTrack1;
     NSString *maskedTrack2;
     NSString *maskedTrack3;
@@ -158,10 +167,6 @@ enum MTSCRACardDataContent
     NSString *responseType;
 	NSString *batteryLevel;
 	NSString *swipeCount;
-    //NSArray  *aryCardData;
-    //NSArray  *aryMaskedTracks;
-    
-    
 	
     AudioUnit					rioUnit;
     AURenderCallbackStruct		inputProc;  
@@ -184,8 +189,9 @@ enum MTSCRACardDataContent
 	NSMutableString *deviceProtocolString;
 	NSMutableString *configParams;
     
+    AVAudioSession *audioSession;
     
-    enum MTSCRADeviceType devType;
+    MTSCRADeviceType devType;
 @public    
     
     
@@ -271,15 +277,15 @@ enum MTSCRACardDataContent
 - (void) sendCommandToDevice:(NSString *)pData; 
 
 //Sets the protocol String for iDynamo
-- (void) setDeviceProtocolString:(NSString *)pData; 
+- (void) setDeviceProtocolString:(NSString *)pData;
 //Sets the config params for SDK
-- (void) setConfigParams:(NSString *)pData; 
+- (void) setConfigurationParams:(NSString *)pData;
 
 //Setup the events to listen for
 - (void) listenForEvents:(UInt32)event;
 
 //Retrieves the Device Type
-- (int) getDeviceType;
+- (long) getDeviceType;
 
 //Retrieves the Length of teh PAN
 - (int) getCardPANLength;
@@ -330,6 +336,8 @@ enum MTSCRACardDataContent
 - (NSString *) getSDKVersion;
 //Retrieves the Operation Status
 - (NSString *) getOperationStatus;
+//Config Functions
+- (NSString *) getEncryptionStatus;
 //Config Functions
 
 
