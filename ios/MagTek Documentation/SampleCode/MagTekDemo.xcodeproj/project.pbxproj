@@ -15,12 +15,16 @@
 		2899E5220DE3E06400AC0155 /* MagTekDemoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* MagTekDemoViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28D7ACF80DDB3853001CB0EB /* MagTekDemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* MagTekDemoViewController.m */; };
+		C342B47718B7CDEE002EBACE /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C342B47618B7CDEE002EBACE /* libMTSCRA.a */; };
+		C342B47918B7CDF7002EBACE /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C342B47818B7CDF7002EBACE /* libMTSCRA.a */; };
+		C3540FA31919A0DF005DA151 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3540FA21919A0DF005DA151 /* Default-568h@2x.png */; };
+		C3540FA51919A2C1005DA151 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3540FA41919A2C1005DA151 /* AVFoundation.framework */; };
 		C916E14613B4F4A100D9358D /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C955FBAB13B3FBBA00A0681F /* AudioToolbox.framework */; };
 		C934076A117F8F670082C270 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9340769117F8F670082C270 /* ExternalAccessory.framework */; };
 		C9340774117F8FC00082C270 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = C9340771117F8FC00082C270 /* Default.png */; };
 		C9340775117F8FC00082C270 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C9340772117F8FC00082C270 /* icon.png */; };
 		C9340776117F8FC00082C270 /* Magtek2.png in Resources */ = {isa = PBXBuildFile; fileRef = C9340773117F8FC00082C270 /* Magtek2.png */; };
-		D715622815BE70C5004FE77B /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D715622715BE70C5004FE77B /* libMTSCRA.a */; };
+		C9BF7F961652CF410090FBD8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BF7F941652CCF80090FBD8 /* MediaPlayer.framework */; };
 		D715624315BE74C5004FE77B /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D715624115BE74A3004FE77B /* libstdc++.dylib */; };
 		D7938B00125407C3002EED4A /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7938AED125406F1002EED4A /* Entitlements.plist */; };
 /* End PBXBuildFile section */
@@ -38,17 +42,20 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* MagTekDemo_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagTekDemo_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MagTekDemo-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MagTekDemo-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C342B47618B7CDEE002EBACE /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMTSCRA.a; sourceTree = "<group>"; };
+		C342B47818B7CDF7002EBACE /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libMTSCRA.a; sourceTree = "<group>"; };
+		C3540FA21919A0DF005DA151 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		C3540FA41919A2C1005DA151 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		C9340769117F8F670082C270 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		C9340771117F8FC00082C270 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
 		C9340772117F8FC00082C270 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon.png; path = Images/icon.png; sourceTree = "<group>"; };
 		C9340773117F8FC00082C270 /* Magtek2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Magtek2.png; path = Images/Magtek2.png; sourceTree = "<group>"; };
 		C955FBAB13B3FBBA00A0681F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		C955FBBD13B4012500A0681F /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/MagTekDemoAppDelegate.h; sourceTree = "<group>"; };
-		D715622715BE70C5004FE77B /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMTSCRA.a; path = "../Lib/build/Release-iphoneos/libMTSCRA.a"; sourceTree = "<group>"; };
+		C9BF7F941652CCF80090FBD8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		D715624115BE74A3004FE77B /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		D7938AED125406F1002EED4A /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		D7D53CC114D9CA170037B0B0 /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTSCRA.h; sourceTree = "<group>"; };
-		EEC30340149FA29300662028 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +63,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3540FA51919A2C1005DA151 /* AVFoundation.framework in Frameworks */,
 				D715624315BE74C5004FE77B /* libstdc++.dylib in Frameworks */,
-				D715622815BE70C5004FE77B /* libMTSCRA.a in Frameworks */,
+				C9BF7F961652CF410090FBD8 /* MediaPlayer.framework in Frameworks */,
 				C916E14613B4F4A100D9358D /* AudioToolbox.framework in Frameworks */,
+				C342B47918B7CDF7002EBACE /* libMTSCRA.a in Frameworks */,
+				C342B47718B7CDEE002EBACE /* libMTSCRA.a in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -92,9 +102,9 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				C3540FA21919A0DF005DA151 /* Default-568h@2x.png */,
+				C9025AB01609896D003D3B5F /* Lib */,
 				D715624115BE74A3004FE77B /* libstdc++.dylib */,
-				D715622715BE70C5004FE77B /* libMTSCRA.a */,
-				EEC30340149FA29300662028 /* libc++.dylib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -130,6 +140,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C3540FA41919A2C1005DA151 /* AVFoundation.framework */,
+				C9BF7F941652CCF80090FBD8 /* MediaPlayer.framework */,
 				C955FBAB13B3FBBA00A0681F /* AudioToolbox.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -137,6 +149,31 @@
 				C9340769117F8F670082C270 /* ExternalAccessory.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9025AB01609896D003D3B5F /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				C9025AB11609896D003D3B5F /* Release-iphoneos */,
+				C9025AB31609896D003D3B5F /* Release-iphonesimulator */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		C9025AB11609896D003D3B5F /* Release-iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				C342B47618B7CDEE002EBACE /* libMTSCRA.a */,
+			);
+			path = "Release-iphoneos";
+			sourceTree = "<group>";
+		};
+		C9025AB31609896D003D3B5F /* Release-iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				C342B47818B7CDF7002EBACE /* libMTSCRA.a */,
+			);
+			path = "Release-iphonesimulator";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,7 +202,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "MagTekDemo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -196,6 +233,7 @@
 				C9340774117F8FC00082C270 /* Default.png in Resources */,
 				C9340775117F8FC00082C270 /* icon.png in Resources */,
 				C9340776117F8FC00082C270 /* Magtek2.png in Resources */,
+				C3540FA31919A0DF005DA151 /* Default-568h@2x.png in Resources */,
 				D7938B00125407C3002EED4A /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -231,13 +269,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TAM NGUYEN (979CGUM2F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TAM NGUYEN (979CGUM2F6)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -245,19 +281,25 @@
 				GCC_PREFIX_HEADER = MagTekDemo_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "MagTekDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				LIBRARY_SEARCH_PATHS = (
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes\"",
-					"\"$(SRCROOT)/Lib\"",
-					"\"$(SRCROOT)/../Lib/build/Release-iphoneos\"",
+					"$(PROJECT_DIR)/Lib/Release-iphoneos",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MTDemo.SCRA;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE = "ff52451b-31a7-4e82-98cd-a08352298b12";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "ff52451b-31a7-4e82-98cd-a08352298b12";
 				SDKROOT = iphoneos;
+				STRIPFLAGS = "";
+				STRIP_INSTALLED_PRODUCT = NO;
 				TARGETED_DEVICE_FAMILY = 1;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv6 armv7s arm64 armv7";
 			};
 			name = Debug;
 		};
@@ -265,51 +307,52 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					armv7,
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MagTek";
+				CODE_SIGN_IDENTITY = "iPhone Developer: TAM NGUYEN (979CGUM2F6)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: TAM NGUYEN (979CGUM2F6)";
 				COPY_PHASE_STRIP = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MagTekDemo_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "MagTekDemo-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				LIBRARY_SEARCH_PATHS = (
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
 					"$(inherited)",
-					"\"$(SRCROOT)/Classes\"",
-					"\"$(SRCROOT)/Lib\"",
-					"\"$(SRCROOT)/../Lib/build/Release-iphoneos\"",
+					"$(PROJECT_DIR)/Lib/Release-iphoneos",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Lib/Release-iphonesimulator",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = MTDemo.SCRA;
+				PROVISIONING_PROFILE = "c35cb340-e2ef-4d27-b3cc-aabe751f5755";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
+				SEPARATE_STRIP = YES;
+				STRIPFLAGS = "\"-S -x\"";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
-				VALID_ARCHS = "armv7 armv6";
+				VALID_ARCHS = "armv6 armv7s arm64 armv7";
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				PROVISIONING_PROFILE = "";
+				ONLY_ACTIVE_ARCH = YES;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
@@ -318,20 +361,15 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv7,
-					armv6,
-				);
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: MagTek";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: MagTek";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};

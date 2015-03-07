@@ -1,5 +1,5 @@
 **********************************************************************************
-99510108 WEB iOS  SOFT DEV KIT - SDK
+30037020 SFTW MAGTEK SCRA SDK FOR IOS (SOURCE)
 **********************************************************************************
 V104.02 Date:05.01.2012
 
@@ -11,7 +11,6 @@ V104.02 Date:05.01.2012
 
    * iDynamo Reader
    	* Separated the documents for Audio Reader and iDynamo
-    
 
 **********************************************************************************
 **********************************************************************************
@@ -37,4 +36,118 @@ V105.01 Date:07.24.2012
    	* NA
 **********************************************************************************
 **********************************************************************************
+Part Rev = 108.01, SDK = V106.01, Sample Code=2.0.0.02 Date:08.10.2012
     
+   * Audio Reader 
+	* Updated SDK to Support non blocking delay on close to allow reader to display LED
+
+   * iDynamo Reader
+   	* NA
+**********************************************************************************
+**********************************************************************************
+Part Rev = 109.01, SDK = V107.01, Sample Code=2.0.0.03 Date:08.17.2012
+    
+   * Audio Reader 
+	* Updated SDK to send events on open/close
+        * Removed the 2 second delay on close
+        * Updated Sample Code to keep the reader open on track errors
+
+
+   * iDynamo Reader
+   	* NA
+**********************************************************************************
+**********************************************************************************
+Part Rev = 110.01, SDK = V108.01, Sample Code=2.0.0.04 Date:09.25.2012
+    
+   * Audio Reader 
+	* Updated SDK to support new reader
+        * Built SDK on iOS6
+
+
+   * iDynamo Reader
+        * Updated SDK to avoid multiple connect/disconnect events
+**********************************************************************************
+**********************************************************************************
+Part Rev = 111.01, SDK = V109.01, Sample Code=2.0.0.04 Date:05.21.2013
+    
+   * Audio Reader 
+        * Built SDK using XCode 4.6.2
+
+
+   * iDynamo Reader
+        * Updated SDK to remove delay on close and wait for session to close before opening
+        * Built SDK using XCode 4.6.2
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 112.01, SDK = V109.01, Sample Code=2.0.0.05 Date:07.23.2013
+    
+   * Audio Reader 
+        * NA
+
+
+   * iDynamo Reader
+        * Added a 5 second delay for the automatic openDevice call within the Application
+	  
+	  Delegate methods applicationDidBecomeActive and applicationDidFinishLaunching.
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 114.01, SDK = V109.01, Sample Code=2.0.0.05 Date:10.15.2013
+
+	Released as 30037020.  Original P/N: 21035001
+**********************************************************************************
+**********************************************************************************
+Part Rev = 115.01, SDK = V110.01, Sample Code=2.0.0.06 Date:11.19.2013
+    
+   * Audio Reader 
+        * Improved the MTSCRA Library to handle interference to the Audio Unit Buffer caused
+	  by the iOS 7 update.
+	* Updated the UI to comply with iOS 7.0.0
+	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	* Added functionality that ensures that updateConnStatus is performed on the Main Thread
+
+
+   * iDynamo Reader
+        * Updated the UI to comply with iOS 7.0.0
+	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	* Added functionality that ensures that updateConnStatus is performed on the Main Thread
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 116.01, SDK = V110.01, Sample Code=2.0.0.07 Date:03.26.2014
+    
+   * Updated the Target Build Settings to account for the “Additional Strip Flags,”
+     “Deployment Postprocessing,” “Strip Debug Symbols,” Strip Linked Product,” “Strip Style,”
+     and “Use Separate Strip.”
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 118.01, SDK = V111.01, Sample Code = 2.0.0.08 Date:05.20.2014
+    
+   * Updated the Library and Demo Projects to support the arm64 architecture.
+   * Updated the MTSCRA Library to handle the new 64-bit architecture.
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 119.01, SDK = V112.01, Sample Code = 2.0.0.09 Date:06.04.2014
+    
+   * Added support for iOS 6.0 and above.
+   * Updated the MTSCRA Demo Project to ARC.
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 120.01, SDK = V113.01, Sample Code = 2.0.0.10 Date:06.25.2014
+    
+   * Updated the library the support all Audio Readers’ Serial Number retrieval.
+     - This includes the Discovery Command as well as a Card Swipe
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 121.01, SDK = V114.01, Sample Code = 2.0.0.11 Date:11.24.2014
+    
+   * Fix Double initialization on SDK.
+
+**********************************************************************************
+**********************************************************************************

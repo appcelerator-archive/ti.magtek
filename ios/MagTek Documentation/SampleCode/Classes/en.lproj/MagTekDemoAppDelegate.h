@@ -2,31 +2,41 @@
 //  MagTekDemoAppDelegate.h
 //  MagTekDemo
 //
-//  Created by MagTek  on 11/27/11.
+//  Created by MagTek on 11/27/11.
 //  Copyright 2011 MagTek. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import <AudioToolbox/AudioToolbox.h>
 #import <AudioUnit/AudioUnit.h>
-#import "MTSCRA.h"
+#import <AudioToolbox/AudioToolbox.h>
 
-
-
+@class MTSCRA;
 @class MagTekDemoViewController;
 
-@interface MagTekDemoAppDelegate : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
-    MagTekDemoViewController *viewController;
-    MTSCRA *mtSCRALib;
-}
+@interface MagTekDemoAppDelegate : NSObject
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet MagTekDemoViewController *viewController;
-@property (nonatomic, retain) MTSCRA *mtSCRALib;
+#pragma mark -
+#pragma mark MTSCRA Property
+#pragma mark -
 
+@property (nonatomic, strong) MTSCRA *mtSCRALib;
 
-- (MTSCRA *) getSCRALib;
+#pragma mark -
+#pragma mark UIWindow Property
+#pragma mark -
+
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+
+#pragma mark -
+#pragma mark MagTekDemoViewController Property
+#pragma mark -
+
+@property (nonatomic, strong) IBOutlet MagTekDemoViewController *viewController;
+
+#pragma mark -
+#pragma mark MTSCRA Library Method
+#pragma mark -
+
+- (MTSCRA *)getSCRALib;
 
 @end
-
