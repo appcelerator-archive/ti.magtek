@@ -1,5 +1,5 @@
 **********************************************************************************
-30037020 SFTW MAGTEK SCRA SDK FOR IOS (SOURCE)
+99510111  DYNAMAX/EDYNAMO/UDYNAMO/ADYNAMO/IDYNAMO SDK FOR IOS (WEB) 
 **********************************************************************************
 V104.02 Date:05.01.2012
 
@@ -11,13 +11,14 @@ V104.02 Date:05.01.2012
 
    * iDynamo Reader
    	* Separated the documents for Audio Reader and iDynamo
+    
 
 **********************************************************************************
 **********************************************************************************
 V104.04 Date:06.19.2012
     
    * Audio Reader 
-   	* Added support for Mod10 Check DIgit
+   	* Added support for Mod10 Check Digit
 
    * iDynamo Reader
    	* NA
@@ -36,7 +37,7 @@ V105.01 Date:07.24.2012
    	* NA
 **********************************************************************************
 **********************************************************************************
-Part Rev = 108.01, SDK = V106.01, Sample Code=2.0.0.02 Date:08.10.2012
+Pert Rev = 108.01, SDK = V106.01, Sample Code=2.0.0.02 Date:08.10.2012
     
    * Audio Reader 
 	* Updated SDK to Support non blocking delay on close to allow reader to display LED
@@ -55,17 +56,19 @@ Part Rev = 109.01, SDK = V107.01, Sample Code=2.0.0.03 Date:08.17.2012
 
    * iDynamo Reader
    	* NA
+
 **********************************************************************************
 **********************************************************************************
 Part Rev = 110.01, SDK = V108.01, Sample Code=2.0.0.04 Date:09.25.2012
     
    * Audio Reader 
 	* Updated SDK to support new reader
-        * Built SDK on iOS6
+        * Built SDK using XCode 4.5
 
 
    * iDynamo Reader
         * Updated SDK to avoid multiple connect/disconnect events
+
 **********************************************************************************
 **********************************************************************************
 Part Rev = 111.01, SDK = V109.01, Sample Code=2.0.0.04 Date:05.21.2013
@@ -90,64 +93,213 @@ Part Rev = 112.01, SDK = V109.01, Sample Code=2.0.0.05 Date:07.23.2013
    * iDynamo Reader
         * Added a 5 second delay for the automatic openDevice call within the Application
 	  
-	  Delegate methods applicationDidBecomeActive and applicationDidFinishLaunching.
+          Delegate methods applicationDidBecomeActive and applicationDidFinishLaunching.
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 113.01, SDK = V109.01, Sample Code=2.0.0.05 Date:09.03.2013
+
+Include Doc folder
+   * Audio Reader 
+        * NA
+
+
+   * iDynamo Reader
+        * NA
 
 **********************************************************************************
 **********************************************************************************
 Part Rev = 114.01, SDK = V109.01, Sample Code=2.0.0.05 Date:10.15.2013
 
-	Released as 30037020.  Original P/N: 21035001
+	Released as 99510111.  Original P/N: 99510108
+
 **********************************************************************************
 **********************************************************************************
-Part Rev = 115.01, SDK = V110.01, Sample Code=2.0.0.06 Date:11.19.2013
-    
+Part Rev = 115.01, SDK = V110.01, Sample Code=2.0.0.06 Date:11.14.2013
+
    * Audio Reader 
         * Improved the MTSCRA Library to handle interference to the Audio Unit Buffer caused
-	  by the iOS 7 update.
-	* Updated the UI to comply with iOS 7.0.0
-	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
-	* Added functionality that ensures that updateConnStatus is performed on the Main Thread
+	  
+          by the iOS 7 update.
+	
+        * Updated the UI to comply with iOS 7.0.0
+	
+        * Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	
+        * Added functionality that ensures that updateConnStatus is performed on the Main Thread
 
 
    * iDynamo Reader
         * Updated the UI to comply with iOS 7.0.0
-	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
-	* Added functionality that ensures that updateConnStatus is performed on the Main Thread
+	
+        * Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	
+        * Added functionality that ensures that updateConnStatus is performed on the Main Thread
 
 **********************************************************************************
 **********************************************************************************
+Part Rev = 115.01, SDK = V110.01, Sample Code=2.0.0.06 Date:11.14.2013
+
+   * Audio Reader 
+        * Updated the MTSCRA Library to handle interference to the Audio Unit Buffer caused
+ by the iOS 7 update.
+	
+	* Updated the UI to comply with iOS 7.0.0
+	
+	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	
+	* Added functionality in the sample code that ensures that updateConnStatus is performed on the Main Thread
+
+
+   * iDynamo Reader
+        * Updated the UI to comply with iOS 7.0.0
+	
+	* Updated the UI to handle the unplugging and plugging of iDynamo and MSR readers
+	
+	* Added functionality in the sample code that ensures that updateConnStatus is performed on the Main Thread
+
+**********************************************************************************
+**********************************************************************************
+
 Part Rev = 116.01, SDK = V110.01, Sample Code=2.0.0.07 Date:03.26.2014
     
    * Updated the Target Build Settings to account for the “Additional Strip Flags,”
+
      “Deployment Postprocessing,” “Strip Debug Symbols,” Strip Linked Product,” “Strip Style,”
+
      and “Use Separate Strip.”
 
 **********************************************************************************
 **********************************************************************************
-Part Rev = 118.01, SDK = V111.01, Sample Code = 2.0.0.08 Date:05.20.2014
+
+Part Rev = 117.01, SDK = V110.01, Sample Code=2.0.0.07 Date:04.08.2014
     
-   * Updated the Library and Demo Projects to support the arm64 architecture.
-   * Updated the MTSCRA Library to handle the new 64-bit architecture.
+   * Added the missing files that are necessary for the project to compile and run.
 
 **********************************************************************************
 **********************************************************************************
+
+Part Rev = 118.01, SDK = V111.01, Sample Code=2.0.0.08 Date:05.20.2014
+    
+   * Updated the Project with the 64-bit MTSCRA Library
+   
+   * Updated the Project to the support the 64-bit architecture
+
+
+**********************************************************************************
+**********************************************************************************
+
 Part Rev = 119.01, SDK = V112.01, Sample Code = 2.0.0.09 Date:06.04.2014
     
    * Added support for iOS 6.0 and above.
+   
    * Updated the MTSCRA Demo Project to ARC.
 
 **********************************************************************************
 **********************************************************************************
+
 Part Rev = 120.01, SDK = V113.01, Sample Code = 2.0.0.10 Date:06.25.2014
     
    * Updated the library the support all Audio Readers’ Serial Number retrieval.
-     - This includes the Discovery Command as well as a Card Swipe
+     
+	- This includes the Discovery Command as well as a Card Swipe
 
 **********************************************************************************
 **********************************************************************************
+
+
 Part Rev = 121.01, SDK = V114.01, Sample Code = 2.0.0.11 Date:11.24.2014
     
-   * Fix Double initialization on SDK.
+   * Updated the library to fix double initialization
 
 **********************************************************************************
 **********************************************************************************
+
+Part Rev = 122, SDK = V115.01, Sample Code = 2.0.0.14 Date:02.04.2015
+   
+   
+   *Added DynaMAX support   
+   *Return error when audio session cannot be initialized   
+   *Added Delegate 
+
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 123.01, SDK = V116.01, Sample Code = 2.0.0.15 Date:7.9.2015
+   
+ 
+   *Added support for background music from other apps when not using audio reader.
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 124.01, SDK = V117.01, Sample Code = 2.0.0.16 Date:10.19.2015
+   
+
+   *Prevent reader from being unresponsive when plugged while app in background
+
+
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 125, SDK = V118.01, Sample Code = 1.0.1 Date:11.17.2015
+   
+
+   *Add eDynamo
+   
+   *Address isDeviceConnected.
+ 
+   *Change support to iOS 7 or higher
+
+
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 126, SDK = V119.01, Sample Code = 2.0.1 Date:8.15.2016
+   
+
+   *Added DynaPro format for EMV transaction messages. 
+   
+   *Added getCardPAN function.   
+   *Added deviceNotPaired delegate.
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 127, SDK = V119.01, Sample Code = 2.0.1 Date:11.21.2016
+   
+
+   *Added Privacy Key
+
+
+**********************************************************************************
+**********************************************************************************
+Part Rev = 128, SDK = V120.01, Sample Code = 3.0.1 Date:2.8.2017
+   
+ 
+   *Added requestDeviceList   
+   *Added setAdress   
+   *Added getProductID
+
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 129, SDK = V121.01, Sample Code = 3.0.1 Date:8.3.2017
+   
+
+   *Modified getDeviceSerial to return Serial number without card swipe.
+   
+   *Address iOS bug for sending multiple connection notification.
+
+
+**********************************************************************************
+**********************************************************************************
+
+Part Rev = 130, SDK = V122.01, Sample Code = 2.0.1 Date:10.02.2017
+
+   * Optimized Lighting communication.
+
+   * Add support for kDynamo/tDynamo/sDynamo.
+

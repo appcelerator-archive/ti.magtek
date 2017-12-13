@@ -17,3 +17,4 @@ android/yuidoc/*
 *.xccheckout
 ios/magtek.xcodeproj/xcuserdata/*
 ios/magtek.xcodeproj/project.xcworkspace/xcuserdata/*
+/ios/metadata.json
