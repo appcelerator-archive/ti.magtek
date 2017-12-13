@@ -66,6 +66,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 {	
     if (self = [super init]) {
         mtSCRALib = [[MTSCRA alloc] init];
+//      mtSCRALib.delegate = self;
         
         // TRANS_STATUS_START should be used with caution. CPU intensive
         // tasks done after this events and before TRANS_STATUS_OK

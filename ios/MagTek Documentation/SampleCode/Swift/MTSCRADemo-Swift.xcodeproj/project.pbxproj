@@ -1,0 +1,432 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C617FF921BA1F9EC00F30371 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C617FF911BA1F9EC00F30371 /* AppDelegate.swift */; };
+		C617FF971BA1F9EC00F30371 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C617FF951BA1F9EC00F30371 /* Main.storyboard */; };
+		C617FF991BA1F9EC00F30371 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C617FF981BA1F9EC00F30371 /* Assets.xcassets */; };
+		C617FF9C1BA1F9EC00F30371 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C617FF9A1BA1F9EC00F30371 /* LaunchScreen.storyboard */; };
+		C629F1701BC2F63000F2D69E /* HexUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C629F16F1BC2F63000F2D69E /* HexUtil.m */; };
+		C629F1731BC2F63900F2D69E /* NSObject+TLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C629F1721BC2F63900F2D69E /* NSObject+TLVParser.m */; };
+		C662C14D1F83D91600815982 /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C662C14E1F83D91600815982 /* libMTSCRA.a */; };
+		C662C1501F83DB4D00815982 /* kDynamoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C662C14F1F83DB4D00815982 /* kDynamoController.swift */; };
+		C6B5C07E1BA9E5770076A1FE /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B5C07D1BA9E5770076A1FE /* libstdc++.dylib */; };
+		C6CE8A911BFA412C00E4CBFE /* optionController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CE8A901BFA412C00E4CBFE /* optionController.m */; };
+		C6CE8A941BFA41F300E4CBFE /* blePairDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C6CE8A931BFA41F300E4CBFE /* blePairDemo.m */; };
+		C6D9E7771BDEE64F0092704F /* eDynamoSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = C6D9E7761BDEE64F0092704F /* eDynamoSignature.m */; };
+		C6DA8E4C1BA9C19D00E0486D /* iDynamoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E4B1BA9C19D00E0486D /* iDynamoController.swift */; };
+		C6DA8E4E1BA9C1AB00E0486D /* audioController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E4D1BA9C1AB00E0486D /* audioController.swift */; };
+		C6DA8E501BA9C1BB00E0486D /* DynaMAXController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E4F1BA9C1BB00E0486D /* DynaMAXController.swift */; };
+		C6DA8E521BA9C1D000E0486D /* eDynamoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E511BA9C1D000E0486D /* eDynamoController.swift */; };
+		C6DA8E541BA9C7E200E0486D /* MTDataViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E531BA9C7E200E0486D /* MTDataViewerViewController.swift */; };
+		C6DA8E8D1BA9F24000E0486D /* BLEScannerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6DA8E8C1BA9F24000E0486D /* BLEScannerList.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C617FF8E1BA1F9EC00F30371 /* MTSCRADemo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MTSCRADemo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C617FF911BA1F9EC00F30371 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C617FF961BA1F9EC00F30371 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C617FF981BA1F9EC00F30371 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C617FF9B1BA1F9EC00F30371 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C617FF9D1BA1F9EC00F30371 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C617FFA61BA1F9EC00F30371 /* MTSCRADemo_SwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTSCRADemo_SwiftTests.swift; sourceTree = "<group>"; };
+		C617FFA81BA1F9EC00F30371 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C617FFB11BA1F9EC00F30371 /* MTSCRADemo_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTSCRADemo_SwiftUITests.swift; sourceTree = "<group>"; };
+		C617FFB31BA1F9EC00F30371 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C629F16E1BC2F63000F2D69E /* HexUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexUtil.h; sourceTree = "<group>"; };
+		C629F16F1BC2F63000F2D69E /* HexUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexUtil.m; sourceTree = "<group>"; };
+		C629F1711BC2F63900F2D69E /* NSObject+TLVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+TLVParser.h"; sourceTree = "<group>"; };
+		C629F1721BC2F63900F2D69E /* NSObject+TLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+TLVParser.m"; sourceTree = "<group>"; };
+		C662C14E1F83D91600815982 /* libMTSCRA.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libMTSCRA.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C662C14F1F83DB4D00815982 /* kDynamoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = kDynamoController.swift; sourceTree = "<group>"; };
+		C6B5C07D1BA9E5770076A1FE /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		C6CE8A8F1BFA412C00E4CBFE /* optionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = optionController.h; sourceTree = "<group>"; };
+		C6CE8A901BFA412C00E4CBFE /* optionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = optionController.m; sourceTree = "<group>"; };
+		C6CE8A921BFA41F300E4CBFE /* blePairDemo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blePairDemo.h; sourceTree = "<group>"; };
+		C6CE8A931BFA41F300E4CBFE /* blePairDemo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = blePairDemo.m; sourceTree = "<group>"; };
+		C6CF12D01F867E340074435B /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTSCRA.h; path = ../../Lib/MTSCRA.h; sourceTree = "<group>"; };
+		C6D9E7751BDEE64F0092704F /* eDynamoSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eDynamoSignature.h; sourceTree = "<group>"; };
+		C6D9E7761BDEE64F0092704F /* eDynamoSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = eDynamoSignature.m; sourceTree = "<group>"; };
+		C6DA8E4B1BA9C19D00E0486D /* iDynamoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iDynamoController.swift; sourceTree = "<group>"; };
+		C6DA8E4D1BA9C1AB00E0486D /* audioController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = audioController.swift; sourceTree = "<group>"; };
+		C6DA8E4F1BA9C1BB00E0486D /* DynaMAXController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DynaMAXController.swift; sourceTree = "<group>"; };
+		C6DA8E511BA9C1D000E0486D /* eDynamoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = eDynamoController.swift; sourceTree = "<group>"; };
+		C6DA8E531BA9C7E200E0486D /* MTDataViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDataViewerViewController.swift; sourceTree = "<group>"; };
+		C6DA8E891BA9EB3100E0486D /* MTSCRADemo-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MTSCRADemo-Bridge.h"; sourceTree = "<group>"; };
+		C6DA8E8C1BA9F24000E0486D /* BLEScannerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEScannerList.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C617FF8B1BA1F9EC00F30371 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C662C14D1F83D91600815982 /* libMTSCRA.a in Frameworks */,
+				C6B5C07E1BA9E5770076A1FE /* libstdc++.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C617FF851BA1F9EC00F30371 = {
+			isa = PBXGroup;
+			children = (
+				C6CF12D01F867E340074435B /* MTSCRA.h */,
+				C6DA8E891BA9EB3100E0486D /* MTSCRADemo-Bridge.h */,
+				C6B5C07D1BA9E5770076A1FE /* libstdc++.dylib */,
+				C617FF901BA1F9EC00F30371 /* MTSCRADemo-Swift */,
+				C617FFA51BA1F9EC00F30371 /* MTSCRADemo-SwiftTests */,
+				C617FFB01BA1F9EC00F30371 /* MTSCRADemo-SwiftUITests */,
+				C617FF8F1BA1F9EC00F30371 /* Products */,
+				C662C14C1F83D91600815982 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		C617FF8F1BA1F9EC00F30371 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C617FF8E1BA1F9EC00F30371 /* MTSCRADemo-Swift.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C617FF901BA1F9EC00F30371 /* MTSCRADemo-Swift */ = {
+			isa = PBXGroup;
+			children = (
+				C629F16D1BC2F62300F2D69E /* TLVParser */,
+				C617FF911BA1F9EC00F30371 /* AppDelegate.swift */,
+				C6DA8E4B1BA9C19D00E0486D /* iDynamoController.swift */,
+				C6DA8E4D1BA9C1AB00E0486D /* audioController.swift */,
+				C6DA8E4F1BA9C1BB00E0486D /* DynaMAXController.swift */,
+				C6DA8E511BA9C1D000E0486D /* eDynamoController.swift */,
+				C662C14F1F83DB4D00815982 /* kDynamoController.swift */,
+				C6DA8E531BA9C7E200E0486D /* MTDataViewerViewController.swift */,
+				C6DA8E8C1BA9F24000E0486D /* BLEScannerList.swift */,
+				C6D9E7751BDEE64F0092704F /* eDynamoSignature.h */,
+				C6D9E7761BDEE64F0092704F /* eDynamoSignature.m */,
+				C6CE8A8F1BFA412C00E4CBFE /* optionController.h */,
+				C6CE8A901BFA412C00E4CBFE /* optionController.m */,
+				C6CE8A921BFA41F300E4CBFE /* blePairDemo.h */,
+				C6CE8A931BFA41F300E4CBFE /* blePairDemo.m */,
+				C617FF951BA1F9EC00F30371 /* Main.storyboard */,
+				C617FF981BA1F9EC00F30371 /* Assets.xcassets */,
+				C617FF9A1BA1F9EC00F30371 /* LaunchScreen.storyboard */,
+				C617FF9D1BA1F9EC00F30371 /* Info.plist */,
+			);
+			path = "MTSCRADemo-Swift";
+			sourceTree = "<group>";
+		};
+		C617FFA51BA1F9EC00F30371 /* MTSCRADemo-SwiftTests */ = {
+			isa = PBXGroup;
+			children = (
+				C617FFA61BA1F9EC00F30371 /* MTSCRADemo_SwiftTests.swift */,
+				C617FFA81BA1F9EC00F30371 /* Info.plist */,
+			);
+			path = "MTSCRADemo-SwiftTests";
+			sourceTree = "<group>";
+		};
+		C617FFB01BA1F9EC00F30371 /* MTSCRADemo-SwiftUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C617FFB11BA1F9EC00F30371 /* MTSCRADemo_SwiftUITests.swift */,
+				C617FFB31BA1F9EC00F30371 /* Info.plist */,
+			);
+			path = "MTSCRADemo-SwiftUITests";
+			sourceTree = "<group>";
+		};
+		C629F16D1BC2F62300F2D69E /* TLVParser */ = {
+			isa = PBXGroup;
+			children = (
+				C629F16E1BC2F63000F2D69E /* HexUtil.h */,
+				C629F16F1BC2F63000F2D69E /* HexUtil.m */,
+				C629F1711BC2F63900F2D69E /* NSObject+TLVParser.h */,
+				C629F1721BC2F63900F2D69E /* NSObject+TLVParser.m */,
+			);
+			name = TLVParser;
+			sourceTree = "<group>";
+		};
+		C662C14C1F83D91600815982 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C662C14E1F83D91600815982 /* libMTSCRA.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C617FF8D1BA1F9EC00F30371 /* MTSCRADemo-Swift */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C617FFB61BA1F9EC00F30371 /* Build configuration list for PBXNativeTarget "MTSCRADemo-Swift" */;
+			buildPhases = (
+				C617FF8A1BA1F9EC00F30371 /* Sources */,
+				C617FF8B1BA1F9EC00F30371 /* Frameworks */,
+				C617FF8C1BA1F9EC00F30371 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MTSCRADemo-Swift";
+			productName = "MTSCRADemo-Swift";
+			productReference = C617FF8E1BA1F9EC00F30371 /* MTSCRADemo-Swift.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C617FF861BA1F9EC00F30371 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = MagTek;
+				TargetAttributes = {
+					C617FF8D1BA1F9EC00F30371 = {
+						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 27F3DXDP8L;
+						LastSwiftMigration = 0830;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = C617FF891BA1F9EC00F30371 /* Build configuration list for PBXProject "MTSCRADemo-Swift" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C617FF851BA1F9EC00F30371;
+			productRefGroup = C617FF8F1BA1F9EC00F30371 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C617FF8D1BA1F9EC00F30371 /* MTSCRADemo-Swift */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C617FF8C1BA1F9EC00F30371 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C617FF9C1BA1F9EC00F30371 /* LaunchScreen.storyboard in Resources */,
+				C617FF991BA1F9EC00F30371 /* Assets.xcassets in Resources */,
+				C617FF971BA1F9EC00F30371 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C617FF8A1BA1F9EC00F30371 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6CE8A941BFA41F300E4CBFE /* blePairDemo.m in Sources */,
+				C6DA8E4C1BA9C19D00E0486D /* iDynamoController.swift in Sources */,
+				C6DA8E8D1BA9F24000E0486D /* BLEScannerList.swift in Sources */,
+				C6DA8E4E1BA9C1AB00E0486D /* audioController.swift in Sources */,
+				C6DA8E541BA9C7E200E0486D /* MTDataViewerViewController.swift in Sources */,
+				C6CE8A911BFA412C00E4CBFE /* optionController.m in Sources */,
+				C6DA8E521BA9C1D000E0486D /* eDynamoController.swift in Sources */,
+				C617FF921BA1F9EC00F30371 /* AppDelegate.swift in Sources */,
+				C6DA8E501BA9C1BB00E0486D /* DynaMAXController.swift in Sources */,
+				C629F1731BC2F63900F2D69E /* NSObject+TLVParser.m in Sources */,
+				C662C1501F83DB4D00815982 /* kDynamoController.swift in Sources */,
+				C6D9E7771BDEE64F0092704F /* eDynamoSignature.m in Sources */,
+				C629F1701BC2F63000F2D69E /* HexUtil.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		C617FF951BA1F9EC00F30371 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C617FF961BA1F9EC00F30371 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		C617FF9A1BA1F9EC00F30371 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C617FF9B1BA1F9EC00F30371 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C617FFB41BA1F9EC00F30371 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C617FFB51BA1F9EC00F30371 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C617FFB71BA1F9EC00F30371 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 27F3DXDP8L;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "MTSCRADemo-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Lib/Release-iphoneos\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Lib/Release-iphoneos\"",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Lib/Release-iphonesimulator\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magtek.MTSCRADemo-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MTSCRADemo-Bridge.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		C617FFB81BA1F9EC00F30371 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 27F3DXDP8L;
+				ENABLE_BITCODE = NO;
+				HEADER_SEARCH_PATHS = "";
+				INFOPLIST_FILE = "MTSCRADemo-Swift/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../Lib/Release-iphoneos\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.magtek.MTSCRADemo-Swift";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MTSCRADemo-Bridge.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C617FF891BA1F9EC00F30371 /* Build configuration list for PBXProject "MTSCRADemo-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C617FFB41BA1F9EC00F30371 /* Debug */,
+				C617FFB51BA1F9EC00F30371 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C617FFB61BA1F9EC00F30371 /* Build configuration list for PBXNativeTarget "MTSCRADemo-Swift" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C617FFB71BA1F9EC00F30371 /* Debug */,
+				C617FFB81BA1F9EC00F30371 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C617FF861BA1F9EC00F30371 /* Project object */;
+}

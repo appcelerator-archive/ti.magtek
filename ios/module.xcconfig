@@ -4,5 +4,4 @@
 //
 
 
-LD_FLAGS=$(inherited) -framework ExternalAccessory
-OTHER_LDFLAGS[sdk=iphonesimulator4*]=$(inherited) -framework ExternalAccessory
+OTHER_LDFLAGS = $(inherited) -framework ExternalAccessory -framework CoreBluetooth -framework AudioToolbox

@@ -144,7 +144,7 @@ Fired when a card is swiped through the scanning device. Properties in the event
 Fired when a card error is detected during the swipe. This event is triggered when errors are detected composing the data for the swipe event. Typically caused by a read error on one of the tracks, and indicates that the card needs to be swiped again.
 
 #### Example
-	Magtek.addEventListener('swipeError',function(e){
+	Magtek.addEventListener('swipeError',function(e) {
 		Ti.API.info('Swipe Error: Please re-swipe the card');
 	});
 
@@ -166,4 +166,4 @@ Please direct all questions, feedback, and concerns to [info@appcelerator.com](m
 
 ## License
 
-Copyright(c) 2010-2012 by Appcelerator, Inc. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.
+Copyright (c) 2010-present by Axway Appcelerator. All Rights Reserved. Please see the LICENSE file included in the distribution for further details.

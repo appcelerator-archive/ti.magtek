@@ -29,8 +29,8 @@
 		7B92777D13A94F9500A440A7 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B92777C13A94F9500A440A7 /* ExternalAccessory.framework */; };
 		7B92777F13A94F9500A440A7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B92777E13A94F9500A440A7 /* Foundation.framework */; };
 		AA747D9F0F9514B9006C5449 /* TiMagtek_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */; };
-		CE48B83F16779CFF00B8CA5B /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE48B83D16779CFF00B8CA5B /* libMTSCRA.a */; };
 		CE48B84016779CFF00B8CA5B /* MTSCRA.h in Headers */ = {isa = PBXBuildFile; fileRef = CE48B83E16779CFF00B8CA5B /* MTSCRA.h */; };
+		DBD67EE21FE11A23001B77BA /* libMTSCRA-universal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DBD67EE11FE11A23001B77BA /* libMTSCRA-universal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +52,9 @@
 		7B92777C13A94F9500A440A7 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		7B92777E13A94F9500A440A7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA747D9E0F9514B9006C5449 /* TiMagtek_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiMagtek_Prefix.pch; sourceTree = SOURCE_ROOT; };
-		CE48B83D16779CFF00B8CA5B /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMTSCRA.a; path = lib/libMTSCRA.a; sourceTree = "<group>"; };
 		CE48B83E16779CFF00B8CA5B /* MTSCRA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MTSCRA.h; path = lib/MTSCRA.h; sourceTree = "<group>"; };
 		D2AAC07E0554694100DB518D /* libTiMagtek.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTiMagtek.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBD67EE11FE11A23001B77BA /* libMTSCRA-universal.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libMTSCRA-universal.a"; path = "lib/libMTSCRA-universal.a"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,8 +63,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B92777D13A94F9500A440A7 /* ExternalAccessory.framework in Frameworks */,
+				DBD67EE21FE11A23001B77BA /* libMTSCRA-universal.a in Frameworks */,
 				7B92777F13A94F9500A440A7 /* Foundation.framework in Frameworks */,
-				CE48B83F16779CFF00B8CA5B /* libMTSCRA.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,8 +82,7 @@
 		0867D691FE84028FC02AAC07 /* magtek */ = {
 			isa = PBXGroup;
 			children = (
-				CE48B83D16779CFF00B8CA5B /* libMTSCRA.a */,
-				CE48B83E16779CFF00B8CA5B /* MTSCRA.h */,
+				DBD67EE31FE11A27001B77BA /* Magtek SDK */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -119,6 +118,15 @@
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		DBD67EE31FE11A27001B77BA /* Magtek SDK */ = {
+			isa = PBXGroup;
+			children = (
+				DBD67EE11FE11A23001B77BA /* libMTSCRA-universal.a */,
+				CE48B83E16779CFF00B8CA5B /* MTSCRA.h */,
+			);
+			name = "Magtek SDK";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +259,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_CFLAGS = (
 					"-DDEBUG",
@@ -296,6 +305,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/lib\"",
+					"$(PROJECT_DIR)/lib",
 				);
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
