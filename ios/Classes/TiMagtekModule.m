@@ -33,13 +33,11 @@
 
 #pragma mark Internal
 
-// this is generated for your module, please do not change it
 - (id)moduleGUID
 {
   return @"57754725-fe67-4e3f-90c7-1137ad0a5b13";
 }
 
-// this is generated for your module, please do not change it
 - (NSString *)moduleId
 {
   return @"ti.magtek";
@@ -54,19 +52,16 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 
 - (void)startup
 {
-  // This method is called when the module is first loaded
-  // you *must* call the superclass
-
   [super startup];
 
-  NSLog(@"[INFO] Magtek iDynamo Reader Module loaded", self);
+  NSLog(@"[DEBUG] Magtek iDynamo Reader Module loaded", self);
 }
 
 - (id)init
 {
   if (self = [super init]) {
     mtSCRALib = [[MTSCRA alloc] init];
-    //      mtSCRALib.delegate = self;
+//    mtSCRALib.delegate = self;
 
     // TRANS_STATUS_START should be used with caution. CPU intensive
     // tasks done after this events and before TRANS_STATUS_OK
@@ -271,7 +266,7 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
                                      [mtSCRALib getTrackDecodeStatus], @"trackDecodeStatus",
                                      [mtSCRALib getResponseType], @"responseType",
                                      [mtSCRALib getOperationStatus], @"operationStatus",
-                                     NUMINT([mtSCRALib getBatteryLevel]), @"batteryLevel",
+                                     NUMLONG([mtSCRALib getBatteryLevel]), @"batteryLevel",
                                      [mtSCRALib getFirmware], @"firmware",
                                      nil];
 
@@ -393,5 +388,9 @@ MAKE_SYSTEM_NUMBER(DEVICE_TYPE_IDYNAMO, NUMINT(MAGTEKIDYNAMO));
 {
   openDelayAfterRemoveObserver = [TiUtils floatValue:value];
 }
+
+#pragma MTSCRAEventDelegate
+
+// TODO: Move notifications to delegate as soon as the migration is properly documented
 
 @end

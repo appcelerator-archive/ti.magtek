@@ -7,14 +7,14 @@
 #import "MTSCRA.h"
 #import "TiModule.h"
 
-@interface TiMagtekModule : TiModule {
+@interface TiMagtekModule : TiModule/*<MTSCRAEventDelegate>*/ {
   @private
   MTSCRA *mtSCRALib;
   NSString *protocol;
-  int deviceType;
+  UInt32 deviceType;
   BOOL openDeviceOnConnect;
-  float openDelayAfterClose;
-  float openDelayAfterRemoveObserver;
+  CGFloat openDelayAfterClose;
+  CGFloat openDelayAfterRemoveObserver;
 }
 
 @end
